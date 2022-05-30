@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "269585801774",
+    "project_id": "travile-2cd7c",
+    "storage_bucket": "travile-2cd7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269585801774:android:0833d9e5124179827f35bf",
+        "android_client_info": {
+          "package_name": "com.orbital.travile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269585801774-8pq6evpojq6hh9knilchprjn6ipf99e7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-LH6duG1GGR4qrFYInPbE5AVOE59zP0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269585801774-8pq6evpojq6hh9knilchprjn6ipf99e7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
