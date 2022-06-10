@@ -4,8 +4,10 @@ import 'package:travile/models/trip.dart';
 import 'trip_tile.dart';
 
 class TripList extends StatefulWidget {
+  const TripList({Key? key}) : super(key: key);
+
   @override
-  _TripListState createState() => _TripListState();
+  State<TripList> createState() => _TripListState();
 }
 
 class _TripListState extends State<TripList> {

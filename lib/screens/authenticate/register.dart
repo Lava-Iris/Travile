@@ -6,10 +6,10 @@ import 'package:travile/shared/loading.dart';
 class Register extends StatefulWidget {
 
   final Function toggleView;
-  Register({required this.toggleView });
+  const Register({Key? key, required this.toggleView }) : super(key: key);
 
   @override
-  _RegisterState createState() => _RegisterState();
+  State<Register> createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
@@ -25,7 +25,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return loading? Loading() : Scaffold(
+    return loading? const Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],

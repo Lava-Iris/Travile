@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TripTile extends StatelessWidget {
 
   final Trip trip;
-  TripTile({required this.trip });
+  const TripTile({Key? key, required this.trip }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

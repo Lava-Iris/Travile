@@ -6,6 +6,8 @@ import 'package:travile/screens/home/home.dart';
 import '../models/user.dart';
 
 class Wrapper extends StatelessWidget {
+  const Wrapper({Key? key}) : super(key: key);
+
   @override 
   Widget build(BuildContext context) {
 
@@ -13,7 +15,7 @@ class Wrapper extends StatelessWidget {
 
     //return either home or authenticate
     if (user == null) {
-      return Authenticate();
+      return const Authenticate();
     } else {
       return Home(user: user);
     }

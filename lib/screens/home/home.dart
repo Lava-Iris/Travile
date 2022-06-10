@@ -10,30 +10,30 @@ class Home extends StatelessWidget {
 
   final AuthService _auth = AuthService();
   final MyUser user;
-  Home({required this.user});
+  Home({Key? key, required this.user}) : super(key: key);
 
   @override 
   Widget build(BuildContext context) {
     return StreamProvider<List<Trip>>.value(
       value: DatabaseService(uid:user.uid).trips,
-      initialData: [],
+      initialData: const [],
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Travile'),
+          title: const Text('Travile'),
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
             actions: <Widget>[
               TextButton.icon(
-                icon: Icon(Icons.person),
-                label: Text('logout'),
+                icon: const Icon(Icons.person),
+                label: const Text('logout'),
                 onPressed: () async {
                   await _auth.signOut();
                 },
               ),
             ],
         ),
-        body: TripList(),
+        body: const TripList(),
       ),
     );
   }
