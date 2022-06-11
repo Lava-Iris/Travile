@@ -13,8 +13,10 @@ class TripList extends StatefulWidget {
 class _TripListState extends State<TripList> {
   @override
   Widget build(BuildContext context) {
-
+    print("A");
     final trips = Provider.of<List<Trip>>(context);
+
+    print(trips);
 
     return ListView.builder(
       itemCount: trips.length,
