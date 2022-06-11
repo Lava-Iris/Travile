@@ -41,9 +41,7 @@ class _HomeState extends State<Home> {
   }
 
   @override 
-  Widget build(BuildContext context) {
-    print("nice!");
-    
+  Widget build(BuildContext context) {    
     return StreamProvider<List<Trip>>.value(
       value: DatabaseService(uid: '').trips,
       initialData: const [],
@@ -55,8 +53,8 @@ class _HomeState extends State<Home> {
           elevation: 0.0,
           actions: <Widget>[
             TextButton.icon(
-              icon: const Icon(Icons.person),
-              label: const Text('logout'),
+              icon: const Icon(Icons.person, color: Colors.white,),
+              label: const Text('logout', style: TextStyle(color: Colors.white),),
               onPressed: () async {
                 await _auth.signOut();
               },
