@@ -22,7 +22,7 @@ class DatabaseService {
               .map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                print(data);
+                    
                 return Trip(
                   name: data['name'],
                   date: data['date'],
