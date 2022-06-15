@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/home/new_trip_form.dart';
 import 'package:travile/services/auth.dart';
-import 'package:travile/services/database.dart';
+import 'package:travile/services/trips_database.dart';
 import 'package:provider/provider.dart';
 import 'trip_list.dart';
 import 'package:travile/models/trip.dart';
