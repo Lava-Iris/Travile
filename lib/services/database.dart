@@ -4,16 +4,25 @@ import 'package:travile/models/trip.dart';
 class DatabaseService {
 
   final String uid;
-  DatabaseService({ required this.uid });
-
   //collection reference
-  final CollectionReference tripsCollection = FirebaseFirestore.instance.collection('trips');
+  CollectionReference? tripsCollection; 
+
+  DatabaseService({ required this.uid }) {
+    tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
+  }
+
 
   Future updateTrips(String name, String date) async {
-    return await tripsCollection.add({
+    //tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
+    print(tripsCollection);
+    return await tripsCollection!.add({
       'name': name,
       'date': date
     });
+  }
+
+  Future createCollection() async {
+    tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
   }
 
   // trip list from snapshot
@@ -31,7 +40,9 @@ class DatabaseService {
   }
 
   Stream<List<Trip>> get trips {
-    return tripsCollection.snapshots()
+        print(tripsCollection);
+
+    return tripsCollection!.snapshots()
     .map(_tripListFromSnapshot);
   }
 }

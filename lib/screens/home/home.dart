@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
+import 'package:travile/screens/home/new_trip_form.dart';
 import 'package:travile/services/auth.dart';
 import 'package:travile/services/database.dart';
 import 'package:provider/provider.dart';
@@ -40,10 +42,26 @@ class _HomeState extends State<Home> {
     });
   }
 
+  
+
   @override 
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) { 
+
+    void showNewTripPanel() {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return Container(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+            child: NewTripForm(user: widget.user),
+          );
+        }
+      );
+    }
+
     return StreamProvider<List<Trip>>.value(
-      value: DatabaseService(uid: '').trips,
+      value: DatabaseService(uid: widget.user.uid).trips,
       initialData: const [],
       child: Scaffold(
         backgroundColor: Colors.brown[50],
@@ -53,8 +71,15 @@ class _HomeState extends State<Home> {
           elevation: 0.0,
           actions: <Widget>[
             TextButton.icon(
+              onPressed: () async {
+                showNewTripPanel();
+              }, 
+              icon: const Icon(Icons.add), 
+              label: const Text('New Trip', style: TextStyle(color: Colors.white),),
+            ),
+            TextButton.icon(
               icon: const Icon(Icons.person, color: Colors.white,),
-              label: const Text('logout', style: TextStyle(color: Colors.white),),
+              label: const Text('Logout', style: TextStyle(color: Colors.white),),
               onPressed: () async {
                 await _auth.signOut();
               },

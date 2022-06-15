@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:travile/services/database.dart';
 import '../models/user.dart';
 
 class AuthService {
@@ -47,8 +46,8 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
 
-      //create a new document for the user with the uid
-      await DatabaseService(uid:user!.uid).updateTrips('Place', '5/12/2020'); //(List.of(['A', 'B', 'C']));
+      //make new collection here by the name "trips-" + uid
+      //await DatabaseService(uid:user!.uid).createCollection();
 
       return _userFromFirebaseUser(user);
     } catch (error) {
