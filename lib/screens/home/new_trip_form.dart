@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/services/database.dart';
+import 'package:travile/services/trips_database.dart';
 import 'package:travile/shared/constants.dart';
 
 class NewTripForm extends StatefulWidget {
@@ -50,6 +50,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               await DatabaseService(uid:widget.user.uid).updateTrips(_name, _date);
+              Navigator.pop(context);
             }
           ),
         ],

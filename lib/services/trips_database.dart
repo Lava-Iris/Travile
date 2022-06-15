@@ -21,18 +21,14 @@ class DatabaseService {
     });
   }
 
-  Future createCollection() async {
-    tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
-  }
-
   // trip list from snapshot
   List<Trip> _tripListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs
               .map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                    
                 return Trip(
+                  id:document.id,
                   name: data['name'],
                   date: data['date'],
                 );

@@ -13,12 +13,14 @@ class TripTile extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
+          trailing: IconButton(icon: const Icon(Icons.edit), onPressed: () {print(trip.id);}),
           leading: const CircleAvatar(
             backgroundColor: Colors.blue,
             radius: 25.0,
             ),
           title: Text(trip.name),
           subtitle: Text('on ${trip.date}'),
+          onTap: () async {print(trip.name);},
         ),
       ),
     );
