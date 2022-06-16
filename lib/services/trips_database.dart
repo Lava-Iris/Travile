@@ -13,12 +13,14 @@ class DatabaseService {
 
 
   Future addTrips(String name, String date) async {
-    //tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
-    print(tripsCollection);
     return await tripsCollection!.add({
       'name': name,
       'date': date
     });
+  }
+
+  Future deleteTrip({required String tripId}) async {
+    await tripsCollection!.doc(tripId).delete();
   }
 
   // trip list from snapshot
@@ -35,10 +37,9 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<Trip>> get trips {
-        print(tripsCollection);
-
+  Stream<List<Trip>> get trips {  
     return tripsCollection!.snapshots()
     .map(_tripListFromSnapshot);
   }
+
 }

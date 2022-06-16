@@ -45,7 +45,7 @@ class _TripListState extends State<TripList> {
           child: ListView.builder(
             itemCount: trips.length,
             itemBuilder: (context, index) {
-              return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip,);
+              return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user,);
             },
           ),// fill in required params
         )

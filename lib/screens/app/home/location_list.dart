@@ -35,8 +35,7 @@ class _LocationListState extends State<LocationList> {
   @override
   Widget build(BuildContext context) {
     final locations = Provider.of<List<Location>>(context);
-    print("A");
-    print(locations);
+    
     return Column(
       children:[
         ElevatedButton(

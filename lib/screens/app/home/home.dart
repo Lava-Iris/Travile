@@ -30,10 +30,15 @@ class _HomeState extends State<Home> {
     setState(() => { this.location = location });
   }
 
+  void showTrips() {
+    setState(() => { trip = null });
+    setState(() => { location = null });
+  }
+
   @override 
   Widget build(BuildContext context) {
     if (location != null) {
-      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation);
+      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips,);
     } else if (trip != null) {
       return StreamProvider<List<Location>>.value(
         value: LocationsDatabaseService(tripId: trip!.id, uid: widget.user!.uid).locations,
