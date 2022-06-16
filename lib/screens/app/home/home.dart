@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
       return StreamProvider<List<Location>>.value(
         value: LocationsDatabaseService(tripId: trip!.id, uid: widget.user!.uid).locations,
         initialData: const [],
-        child: LocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user,),
+        child: LocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user, showTrips: showTrips,),
       );
     } else {
       return StreamProvider<List<Trip>>.value(

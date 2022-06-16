@@ -53,7 +53,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
               primary: Colors.pink[400],
             ),
             child: const Text(
-              'Update',
+              'Add',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {

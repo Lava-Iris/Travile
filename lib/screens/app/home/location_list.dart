@@ -11,7 +11,8 @@ class LocationList extends StatefulWidget {
   final Trip? trip;
   final Function showLocation;
   final Function showTrip;
-  const LocationList({Key? key, required this.trip, required this.showLocation, required this.showTrip, required this.user}) : super(key: key);
+  final Function showTrips;
+  const LocationList({Key? key, required this.trip, required this.showLocation, required this.showTrip, required this.user, required this.showTrips}) : super(key: key);
 
   @override
   State<LocationList> createState() => _LocationListState();
@@ -39,17 +40,48 @@ class _LocationListState extends State<LocationList> {
     return Column(
       children:[
         const SizedBox(height: 10.0),
-        Ink(
-          decoration: const ShapeDecoration(
-            color: Color.fromARGB(255, 187, 134, 115),
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            onPressed: () async {
-              showNewLocationPanel();
-            }, 
-            icon: const Icon(Icons.add),        
-          ),
+        Row( 
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 0.0),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  widget.showTrips();
+                }, 
+                icon: const Icon(Icons.undo),
+              ),
+            ),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  showNewLocationPanel();
+                }, 
+                icon: const Icon(Icons.add),
+              ),
+            ),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  showNewLocationPanel();
+                }, 
+                icon: const Icon(Icons.search),
+              ),
+            ),
+            const SizedBox(width: 0.0),
+          ]
         ),
         Expanded(
           child: ListView.builder(

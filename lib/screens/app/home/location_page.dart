@@ -18,13 +18,41 @@ class _LocationPageState extends State<LocationPage> {
   Widget build(BuildContext context) {
 
     return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () async {
-            widget.showTrips();
-            }, 
-          child: const Text("Home")),
-        Text(widget.location!.name),
+      children:[
+        const SizedBox(height: 10.0),
+        Row( 
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 0.0),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  widget.showTrip();
+                }, 
+                icon: const Icon(Icons.undo),
+              ),
+            ),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  widget.showTrips();
+                }, 
+                icon: const Icon(Icons.home),
+              ),
+            ),
+            const SizedBox(width: 0.0),
+          ]
+        ),
+        const SizedBox(height: 30.0),
+        Text(widget.location!.text),
       ]
     );
   }

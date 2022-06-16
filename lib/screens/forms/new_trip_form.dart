@@ -45,7 +45,7 @@ class _NewTripFormState extends State<NewTripForm> {
               primary: Colors.pink[400],
             ),
             child: const Text(
-              'Update',
+              'Add',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {

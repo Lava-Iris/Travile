@@ -28,6 +28,7 @@ class LocationsDatabaseService {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
                 return Location(
+                  tripId: tripId,
                   id:document.id,
                   name: data['name'],
                   date: data['date'],

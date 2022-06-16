@@ -36,17 +36,36 @@ class _TripListState extends State<TripList> {
     return Column(
       children:[
         const SizedBox(height: 10.0),
-        Ink(
-          decoration: const ShapeDecoration(
-            color: Color.fromARGB(255, 187, 134, 115),
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            onPressed: () async {
-              showNewTripPanel();
-            }, 
-            icon: const Icon(Icons.add),
-          ),
+        Row( 
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 10.0),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  showNewTripPanel();
+                }, 
+                icon: const Icon(Icons.add),
+              ),
+            ),
+            Ink(
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 187, 134, 115),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () async {
+                  showNewTripPanel();
+                }, 
+                icon: const Icon(Icons.search),
+              ),
+            ),
+            const SizedBox(width: 0.0),
+          ]
         ),
         
         Expanded(
