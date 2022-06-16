@@ -18,7 +18,7 @@ class TripTile extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
           trailing: IconButton(
-            icon: const Icon(Icons.edit), 
+            icon: const Icon(Icons.delete), 
             onPressed: () async {
               DatabaseService(uid:user!.uid).deleteTrip(tripId: trip.id);
             }

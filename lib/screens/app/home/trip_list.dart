@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'new_trip_form.dart';
+import '../../forms/new_trip_form.dart';
 import 'trip_tile.dart';
 
 class TripList extends StatefulWidget {

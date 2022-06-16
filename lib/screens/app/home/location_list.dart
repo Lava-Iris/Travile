@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/home/new_location_form.dart';
+import 'package:travile/screens/forms/new_location_form.dart';
 import 'location_tile.dart';
 
 class LocationList extends StatefulWidget {
