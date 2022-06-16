@@ -49,8 +49,8 @@ class _NewTripFormState extends State<NewTripForm> {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
-              await DatabaseService(uid:widget.user.uid).updateTrips(_name, _date);
               Navigator.pop(context);
+              await DatabaseService(uid:widget.user.uid).updateTrips(_name, _date);
             }
           ),
         ],

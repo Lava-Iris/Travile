@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/screens/authenticate/authenticate.dart';
-import 'package:travile/screens/home/home.dart';
+import 'package:travile/screens/home/app.dart';
 
 import '../models/user.dart';
 
@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Authenticate();
     } else {
-      return Home(user: user);
+      return App(user: user);
     }
   }
 }

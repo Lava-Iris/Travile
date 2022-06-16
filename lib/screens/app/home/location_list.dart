@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
-import 'package:travile/shared/loading.dart';
+import 'package:travile/models/trip.dart';
 import 'location_tile.dart';
 
-class TripPage extends StatefulWidget {
-  const TripPage({Key? key}) : super(key: key);
+class LocationList extends StatefulWidget {
+  final Trip? trip;
+  final Function showLocation;
+  final Function showTrip;
+  const LocationList({Key? key, required this.trip, required this.showLocation, required this.showTrip}) : super(key: key);
 
   @override
-  State<TripPage> createState() => _TripPageState();
+  State<LocationList> createState() => _LocationListState();
 }
 
-class _TripPageState extends State<TripPage> {
+class _LocationListState extends State<LocationList> {
   @override
   Widget build(BuildContext context) {
     final locations = Provider.of<List<Location>>(context);

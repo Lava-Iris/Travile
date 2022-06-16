@@ -1,30 +1,29 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/home/new_trip_form.dart';
+import 'package:travile/screens/app/home/home.dart';
+import 'package:travile/screens/app/home/new_trip_form.dart';
 import 'package:travile/services/auth.dart';
 import 'package:travile/services/trips_database.dart';
 import 'package:provider/provider.dart';
-import 'trip_list.dart';
 import 'package:travile/models/trip.dart';
 
 
-class Home extends StatefulWidget {
+class App extends StatefulWidget {
 
   final MyUser user;
-  const Home({Key? key, required this.user}) : super(key: key);
+  const App({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<App> createState() => _AppState();
 }
 
-class _HomeState extends State<Home> {
+class _AppState extends State<App> {
   final AuthService _auth = AuthService();
 
   int selectedIndex = 0;
   
   static const List<Widget> widgetOptions = <Widget>[
-    TripList(),
+    Home(),
     Text(
       'Index 1: Explore',
     ),
@@ -93,7 +92,7 @@ class _HomeState extends State<Home> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'App',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.business),
