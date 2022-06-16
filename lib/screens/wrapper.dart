@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/screens/authenticate/authenticate.dart';
-import 'package:travile/screens/home/app.dart';
+import 'package:travile/screens/app/app.dart';
 
 import '../models/user.dart';
 
