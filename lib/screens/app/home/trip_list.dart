@@ -35,12 +35,20 @@ class _TripListState extends State<TripList> {
     final trips = Provider.of<List<Trip>>(context);
     return Column(
       children:[
-        ElevatedButton(
-          onPressed: () async {
-            showNewTripPanel();
-          }, 
-          child: const Text("Add trip"),
+        const SizedBox(height: 10.0),
+        Ink(
+          decoration: const ShapeDecoration(
+            color: Color.fromARGB(255, 187, 134, 115),
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            onPressed: () async {
+              showNewTripPanel();
+            }, 
+            icon: const Icon(Icons.add),
+          ),
         ),
+        
         Expanded(
           child: ListView.builder(
             itemCount: trips.length,

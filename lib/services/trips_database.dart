@@ -12,7 +12,7 @@ class DatabaseService {
   }
 
 
-  Future addTrips(String name, String date) async {
+  Future addTrip(String name, String date) async {
     return await tripsCollection!.add({
       'name': name,
       'date': date
@@ -21,6 +21,13 @@ class DatabaseService {
 
   Future deleteTrip({required String tripId}) async {
     await tripsCollection!.doc(tripId).delete();
+  }
+
+  Future updateTrip(String tripId, String name, String date) async {
+    return await tripsCollection!.doc(tripId).set({
+      'name': name,
+      'date': date
+    });
   }
 
   // trip list from snapshot

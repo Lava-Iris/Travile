@@ -50,7 +50,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(uid:widget.user!.uid).addTrips(_name, _date);
+              await DatabaseService(uid:widget.user!.uid).addTrip(_name, _date);
             }
           ),
         ],

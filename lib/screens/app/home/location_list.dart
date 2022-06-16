@@ -35,14 +35,21 @@ class _LocationListState extends State<LocationList> {
   @override
   Widget build(BuildContext context) {
     final locations = Provider.of<List<Location>>(context);
-    
+
     return Column(
       children:[
-        ElevatedButton(
-          onPressed: () async {
-            showNewLocationPanel();
-          }, 
-          child: const Text("Add trip"),
+        const SizedBox(height: 10.0),
+        Ink(
+          decoration: const ShapeDecoration(
+            color: Color.fromARGB(255, 187, 134, 115),
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            onPressed: () async {
+              showNewLocationPanel();
+            }, 
+            icon: const Icon(Icons.add),        
+          ),
         ),
         Expanded(
           child: ListView.builder(
