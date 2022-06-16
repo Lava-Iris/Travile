@@ -14,7 +14,6 @@ class LocationsDatabaseService {
 
 
   Future addLocation(String name, String date, String text) async {
-    print(locationsCollection);
     return await locationsCollection!.add({
       'name': name,
       'date': date,
@@ -38,9 +37,9 @@ class LocationsDatabaseService {
   }
 
   Stream<List<Location>> get locations {
-        print(locationsCollection);
-
     return locationsCollection!.snapshots()
     .map(_locationListFromSnapshot);
   }
+
+  Future updateLocations(String name, String date, String text) async {}
 }

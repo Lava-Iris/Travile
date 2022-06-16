@@ -2,9 +2,10 @@ import 'package:travile/models/location.dart';
 import 'package:flutter/material.dart';
 
 class LocationTile extends StatelessWidget {
-
+  final Function showLocation;
+  final Function showTrip;
   final Location location;
-  const LocationTile({Key? key, required this.location }) : super(key: key);
+  const LocationTile({Key? key, required this.location, required this.showLocation, required this.showTrip }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class LocationTile extends StatelessWidget {
             ),
           title: Text(location.name),
           subtitle: Text('on ${location.date}'),
-          onTap: () async {print(location.name);},
+          onTap: () async {showLocation(location);},
         ),
       ),
     );

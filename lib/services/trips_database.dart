@@ -12,7 +12,7 @@ class DatabaseService {
   }
 
 
-  Future updateTrips(String name, String date) async {
+  Future addTrips(String name, String date) async {
     //tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
     print(tripsCollection);
     return await tripsCollection!.add({

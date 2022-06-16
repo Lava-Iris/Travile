@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/services/trips_database.dart';
+import 'package:travile/services/locations_database.dart';
 import 'package:travile/shared/constants.dart';
 
-class NewTripForm extends StatefulWidget {
+class NewLocationForm extends StatefulWidget {
   final MyUser? user;
-  const NewTripForm({Key? key, required this.user}) : super(key: key);
+  final String tripId;
+  const NewLocationForm({Key? key, required this.user, required this.tripId}) : super(key: key);
 
   @override
-  State<NewTripForm> createState() => _NewTripFormState();
+  State<NewLocationForm> createState() => _NewLocationFormState();
 }
 
-class _NewTripFormState extends State<NewTripForm> {
+class _NewLocationFormState extends State<NewLocationForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = "A";
   String _date = "B";
+  String _text = "C";
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class _NewTripFormState extends State<NewTripForm> {
       child: Column(
         children: <Widget>[
           const Text(
-            'Start a new trip',
+            'Start a new location',
             style: TextStyle(fontSize: 18.0),
           ),
           const SizedBox(height: 30.0),
@@ -36,8 +38,14 @@ class _NewTripFormState extends State<NewTripForm> {
           const SizedBox(height: 10.0),
           TextFormField(
             decoration: textInputDecoration,
-            validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
+            validator: (val) => val!.isEmpty ? 'Please enter a date' : null,
             onChanged: (val) => setState(() => _date = val),
+          ),
+          const SizedBox(height: 10.0),
+          TextFormField(
+            decoration: textInputDecoration,
+            validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
+            onChanged: (val) => setState(() => _text = val),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
@@ -50,7 +58,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(uid:widget.user!.uid).addTrips(_name, _date);
+              await LocationsDatabaseService(uid:widget.user!.uid, tripId: widget.tripId).addLocation(_name, _date, _text);
             }
           ),
         ],
