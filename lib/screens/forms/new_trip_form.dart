@@ -15,7 +15,7 @@ class _NewTripFormState extends State<NewTripForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = "A";
-  String _date = "B";
+  DateTime _date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,26 @@ class _NewTripFormState extends State<NewTripForm> {
             onChanged: (val) => setState(() => _name = val),
           ),
           const SizedBox(height: 10.0),
-          TextFormField(
-            decoration: textInputDecoration,
-            validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
-            onChanged: (val) => setState(() => _date = val),
+          ElevatedButton(
+            onPressed: () {
+              showDatePicker(
+                context: context, 
+                firstDate: DateTime(2000), 
+                initialDate:DateTime.parse('2019-04-16 12:18:06.018950'), 
+                lastDate: DateTime(2022),
+
+
+              ).then((date) {setState(() {
+                _date = date!;
+              });});
+            }, 
+          child: const Text("Pick a date"),
           ),
+          // TextFormField(
+          //   decoration: textInputDecoration,
+          //   validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
+          //   onChanged: (val) => setState(() => _date = val as DateTime),
+          // ),
           const SizedBox(height: 10.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -50,6 +65,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
+              print(_date);
               await DatabaseService(uid:widget.user!.uid).addTrip(_name, _date);
             }
           ),

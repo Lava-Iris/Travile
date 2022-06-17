@@ -1,10 +1,12 @@
+import 'package:travile/models/trip.dart';
+
 class Location {
-  final String tripId;
+  Trip trip;
   final String id;
   String name;
-  String date;
+  DateTime date;
   String text;
 
-  Location({required this.tripId, required this.id, required this.name, required this.date, required this.text });
+  Location({required this.trip, required this.id, required this.name, required this.date, required this.text });
 
 }

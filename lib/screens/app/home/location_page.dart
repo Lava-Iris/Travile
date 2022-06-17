@@ -31,7 +31,7 @@ class _LocationPageState extends State<LocationPage> {
               ),
               child: IconButton(
                 onPressed: () async {
-                  widget.showTrip();
+                  widget.showTrip(widget.location!.trip);
                 }, 
                 icon: const Icon(Icons.undo),
               ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/shared/constants.dart';
 
 class NewLocationForm extends StatefulWidget {
   final MyUser? user;
-  final String tripId;
-  const NewLocationForm({Key? key, required this.user, required this.tripId}) : super(key: key);
+  final Trip trip;
+  const NewLocationForm({Key? key, required this.user, required this.trip}) : super(key: key);
 
   @override
   State<NewLocationForm> createState() => _NewLocationFormState();
@@ -16,7 +17,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = "A";
-  String _date = "B";
+  DateTime _date = DateTime.now();
   String _text = "C";
 
   @override
@@ -36,11 +37,26 @@ class _NewLocationFormState extends State<NewLocationForm> {
             onChanged: (val) => setState(() => _name = val),
           ),
           const SizedBox(height: 10.0),
-          TextFormField(
-            decoration: textInputDecoration,
-            validator: (val) => val!.isEmpty ? 'Please enter a date' : null,
-            onChanged: (val) => setState(() => _date = val),
+          ElevatedButton(
+            onPressed: () {
+              showDatePicker(
+                context: context, 
+                firstDate: DateTime(2000), 
+                initialDate:DateTime.parse('2019-04-16 12:18:06.018950'), 
+                lastDate: DateTime(2022),
+
+
+              ).then((date) {setState(() {
+                _date = date!;
+              });});
+            }, 
+          child: const Text("Pick a date"),
           ),
+          // TextFormField(
+          //   decoration: textInputDecoration,
+          //   validator: (val) => val!.isEmpty ? 'Please enter a date' : null,
+          //   onChanged: (val) => setState(() => _date = val),
+          // ),
           const SizedBox(height: 10.0),
           TextFormField(
             decoration: textInputDecoration,
@@ -58,7 +74,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await LocationsDatabaseService(uid:widget.user!.uid, tripId: widget.tripId).addLocation(_name, _date, _text);
+              await LocationsDatabaseService(uid:widget.user!.uid, trip: widget.trip).addLocation(_name, _date, _text);
             }
           ),
         ],

@@ -27,7 +27,7 @@ class _LocationListState extends State<LocationList> {
       builder: (context) {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: NewLocationForm(user: widget.user, tripId: widget.trip!.id,),
+          child: NewLocationForm(user: widget.user, trip: widget.trip!,),
         );
       }
     );

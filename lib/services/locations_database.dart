@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travile/models/location.dart';
+import 'package:travile/models/trip.dart';
 
 class LocationsDatabaseService {
 
   final String uid;
-  final String tripId;
+  final Trip trip;
   //collection reference
   CollectionReference? locationsCollection; 
 
-  LocationsDatabaseService({ required this.uid, required this.tripId }) {
-    locationsCollection = FirebaseFirestore.instance.collection('trips-$uid').doc(tripId).collection("Locations");
+  LocationsDatabaseService({ required this.uid, required this.trip }) {
+    locationsCollection = FirebaseFirestore.instance.collection('trips-$uid').doc(trip.id).collection("Locations");
   }
 
 
-  Future addLocation(String name, String date, String text) async {
+  Future addLocation(String name, DateTime date, String text) async {
     return await locationsCollection!.add({
       'name': name,
       'date': date,
@@ -28,10 +29,10 @@ class LocationsDatabaseService {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
                 return Location(
-                  tripId: tripId,
+                  trip: trip,
                   id:document.id,
                   name: data['name'],
-                  date: data['date'],
+                  date: (data['date'] as Timestamp).toDate(),
                   text: data['text'],
                 );
     }).toList();
@@ -42,5 +43,5 @@ class LocationsDatabaseService {
     .map(_locationListFromSnapshot);
   }
 
-  Future updateLocations(String name, String date, String text) async {}
+  Future updateLocations(String name, DateTime date, String text) async {}
 }

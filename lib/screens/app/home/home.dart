@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
       return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips,);
     } else if (trip != null) {
       return StreamProvider<List<Location>>.value(
-        value: LocationsDatabaseService(tripId: trip!.id, uid: widget.user!.uid).locations,
+        value: LocationsDatabaseService(trip: trip!, uid: widget.user!.uid).locations,
         initialData: const [],
         child: LocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user, showTrips: showTrips,),
       );

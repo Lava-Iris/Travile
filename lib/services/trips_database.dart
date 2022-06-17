@@ -12,7 +12,7 @@ class DatabaseService {
   }
 
 
-  Future addTrip(String name, String date) async {
+  Future addTrip(String name, DateTime date) async {
     return await tripsCollection!.add({
       'name': name,
       'date': date
@@ -23,7 +23,7 @@ class DatabaseService {
     await tripsCollection!.doc(tripId).delete();
   }
 
-  Future updateTrip(String tripId, String name, String date) async {
+  Future updateTrip(String tripId, String name, DateTime date) async {
     return await tripsCollection!.doc(tripId).set({
       'name': name,
       'date': date
@@ -39,7 +39,7 @@ class DatabaseService {
                 return Trip(
                   id:document.id,
                   name: data['name'],
-                  date: data['date'],
+                  date: (data['date'] as Timestamp).toDate(),
                 );
     }).toList();
   }
