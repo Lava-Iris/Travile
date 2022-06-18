@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travile/services/profile_database.dart';
 import '../models/user.dart';
 
 class AuthService {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   // create user object based on firebase user
   MyUser? _userFromFirebaseUser(User? user) {
@@ -40,6 +41,43 @@ class AuthService {
     } 
   }
 
+  //google sign in
+  Future signInWithGoogle() async {
+    print("A");
+    User? user;
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      try {
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+
+         user = userCredential.user;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          print("account exists with different credentials");
+        }
+        else if (e.code == 'invalid-credential') {
+          print("invalid credentials");
+          // handle the error here
+        }
+      } catch (e) {
+        print(e);
+        // handle the error here
+      }
+    }
+
+    return user;
+  }
 
   //register
   Future registerWithEmailAndPassword(String email, String password, String username) async {

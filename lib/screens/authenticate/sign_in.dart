@@ -94,6 +94,28 @@ class _SignInState extends State<SignIn> {
                 error,
                 style: const TextStyle(color: Colors.red, fontSize: 14.0),
               ),
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pink[400],
+                ),
+                child: const Text(
+                  'Sign In with Google',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {
+                  setState(() {
+                    loading = true;
+                  });
+                  dynamic result = await _auth.signInWithGoogle();
+                  if(result == null) {
+                    setState(() {
+                      loading = false;
+                      error = 'Could not sign in with Google';
+                    });
+                  }
+                }
+              ),
             ],
           ),
         ),
