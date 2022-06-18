@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/home.dart';
+import 'package:travile/screens/app/map.dart';
 
 class App extends StatefulWidget {
 
@@ -35,9 +36,10 @@ class _AppState extends State<App> {
         const Text(
           'Index 1: Explore',
         ),
-        const Text(
-          'Index 2: Map',
-        ),
+        Map(),
+        // const Text(
+        //   'Index 2: Map',
+        // ),
         const Text(
           'Index 3: Wishlist',
         ),
