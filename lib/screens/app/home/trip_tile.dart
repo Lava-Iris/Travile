@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:travile/models/trip.dart';
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
@@ -9,9 +10,9 @@ class TripTile extends StatelessWidget {
   final Function showTrip;
   final Trip trip;
   const TripTile({Key? key, required this.trip, required this.showLocation, required this.showTrip, required this.user }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    String date = DateFormat('dd-MM-yyyy').format(trip.date);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
@@ -28,7 +29,7 @@ class TripTile extends StatelessWidget {
             radius: 25.0,
             ),
           title: Text(trip.name),
-          subtitle: Text('on ${trip.date}'),
+          subtitle: Text('on $date'),
           onTap: () async {showTrip(trip);},
         ),
       ),

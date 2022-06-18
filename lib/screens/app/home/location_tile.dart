@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:travile/models/location.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class LocationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String date = DateFormat('dd-MM-yyyy').format(location.date);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
@@ -20,7 +22,7 @@ class LocationTile extends StatelessWidget {
             radius: 25.0,
             ),
           title: Text(location.name),
-          subtitle: Text('on ${location.date}'),
+          subtitle: Text('on $date'),
           onTap: () async {showLocation(location);},
         ),
       ),
