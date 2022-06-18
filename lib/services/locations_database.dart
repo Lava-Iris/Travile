@@ -10,7 +10,7 @@ class LocationsDatabaseService {
   CollectionReference? locationsCollection; 
 
   LocationsDatabaseService({ required this.uid, required this.trip }) {
-    locationsCollection = FirebaseFirestore.instance.collection('trips-$uid').doc(trip.id).collection("Locations");
+    locationsCollection = FirebaseFirestore.instance.collection('locations').doc(uid).collection("trips-$uid").doc(trip.id).collection("locations-$uid");
   }
 
 

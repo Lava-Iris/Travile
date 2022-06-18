@@ -8,7 +8,7 @@ class DatabaseService {
   CollectionReference? tripsCollection; 
 
   DatabaseService({ required this.uid }) {
-    tripsCollection = FirebaseFirestore.instance.collection('trips-$uid');
+    tripsCollection = FirebaseFirestore.instance.collection('trips').doc(uid).collection('trips-$uid');
   }
 
 
