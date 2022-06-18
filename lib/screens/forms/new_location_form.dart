@@ -32,7 +32,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
           ),
           const SizedBox(height: 30.0),
           TextFormField(
-            decoration: textInputDecoration,
+            decoration: textInputDecoration.copyWith(hintText: "Location"),
             validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
             onChanged: (val) => setState(() => _name = val),
           ),
@@ -59,7 +59,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
           // ),
           const SizedBox(height: 10.0),
           TextFormField(
-            decoration: textInputDecoration,
+            decoration: textInputDecoration.copyWith(hintText: "Text"),
             validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
             onChanged: (val) => setState(() => _text = val),
           ),

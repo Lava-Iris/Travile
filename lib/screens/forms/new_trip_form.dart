@@ -29,7 +29,7 @@ class _NewTripFormState extends State<NewTripForm> {
           ),
           const SizedBox(height: 30.0),
           TextFormField(
-            decoration: textInputDecoration,
+            decoration: textInputDecoration.copyWith(hintText: "Trip Name"),
             validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
             onChanged: (val) => setState(() => _name = val),
           ),
@@ -47,7 +47,7 @@ class _NewTripFormState extends State<NewTripForm> {
                 _date = date!;
               });});
             }, 
-          child: const Text("Pick a date"),
+            child: const Text("Pick a date"),
           ),
           // TextFormField(
           //   decoration: textInputDecoration,
