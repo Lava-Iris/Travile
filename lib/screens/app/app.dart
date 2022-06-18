@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/home.dart';
 import 'package:travile/screens/app/map.dart';
+import 'package:travile/services/auth.dart';
 
 class App extends StatefulWidget {
 
@@ -13,6 +14,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final AuthService _auth = AuthService();
   bool profile = false;
   int selectedIndex = 0;
 
@@ -56,7 +58,8 @@ class _AppState extends State<App> {
               icon: const Icon(Icons.person, color: Colors.white,),
               label: const Text('Logout', style: TextStyle(color: Colors.white),),
               onPressed: () async {
-                profileToggle();//await _auth.signOut();
+                //profileToggle();
+                await _auth.signOut();
               },
             ),
           ],
