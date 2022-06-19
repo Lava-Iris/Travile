@@ -44,63 +44,65 @@ class _RegisterState extends State<Register> {
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
           key:_formKey,
-          child: Column(
-            children: <Widget>[
-              const SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'email'),
-                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
-              ),
-              const SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'password'),
-                obscureText: true,                
-                validator: (val) => val!.length < 6 ? 'Enter a password 6+ characters long' : null,
-                onChanged: (val) {
-                  setState(() => password = val);
-                },
-              ),
-              const SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'username'),
-                obscureText: true,                
-                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
-                onChanged: (val) {
-                  setState(() => username = val);
-                },
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink[400],
+          child: SingleChildScrollView (
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'email'),
+                  validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val) {
+                    setState(() => email = val);
+                  },
                 ),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white),
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'password'),
+                  obscureText: true,                
+                  validator: (val) => val!.length < 6 ? 'Enter a password 6+ characters long' : null,
+                  onChanged: (val) {
+                    setState(() => password = val);
+                  },
                 ),
-                onPressed: () async {
-                  if(_formKey.currentState!.validate()){
-                    setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, username);
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'username'),
+                  obscureText: true,                
+                  validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val) {
+                    setState(() => username = val);
+                  },
+                ),
+                const SizedBox(height: 20.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink[400],
+                  ),
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState!.validate()){
+                      setState(() => loading = true);
+                      dynamic result = await _auth.registerWithEmailAndPassword(email, password, username);
 
-                    if(result == null) {
-                      setState(() {
-                        error = 'Please supply a valid email';
-                        loading = false;
-                      });
+                      if(result == null) {
+                        setState(() {
+                          error = 'Please supply a valid email';
+                          loading = false;
+                        });
+                      }
                     }
                   }
-                }
-              ),
-            const SizedBox(height: 12.0),
-              Text(
-                error,
-                style: const TextStyle(color: Colors.red, fontSize: 14.0),
-              ), 
-            ],
+                ),
+              const SizedBox(height: 12.0),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                ), 
+              ],
+            ),
           ),
         ),
       ),

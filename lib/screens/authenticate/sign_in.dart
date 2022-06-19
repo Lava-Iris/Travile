@@ -42,81 +42,83 @@ class _SignInState extends State<SignIn> {
         ),
         body: Container(
           padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 50.0),
-          child:  Form(
+          child: Form(
 
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              const SizedBox(height: 20.0),
-              TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'email'),
-                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
-              ),
-              const SizedBox(height: 20.0),
-              TextFormField(                
-                decoration: textInputDecoration.copyWith(hintText: 'password'),
-                obscureText: true,
-                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
-                onChanged: (val) {
-                  setState(() => password = val);
-                },
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink[400],
+          child: SingleChildScrollView (
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'email'),
+                  validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val) {
+                    setState(() => email = val);
+                  },
                 ),
-                child: const Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.white),
+                const SizedBox(height: 20.0),
+                TextFormField(                
+                  decoration: textInputDecoration.copyWith(hintText: 'password'),
+                  obscureText: true,
+                  validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  onChanged: (val) {
+                    setState(() => password = val);
+                  },
                 ),
-                onPressed: () async {
-                  if(_formKey.currentState!.validate()){
+                const SizedBox(height: 20.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink[400],
+                  ),
+                  child: const Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState!.validate()){
+                      setState(() {
+                        loading = true;
+                      });
+                      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                      if(result == null) {
+                        
+                        setState(() {
+                          loading = false;
+                          error = 'Could not sign in with those credentials';
+                        });
+                      }
+                    }
+                  }
+                ),
+                const SizedBox(height: 12.0),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                ),
+                const SizedBox(height: 20.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink[400],
+                  ),
+                  child: const Text(
+                    'Sign In with Google',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
                     setState(() {
                       loading = true;
                     });
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    dynamic result = await _auth.signInWithGoogle();
                     if(result == null) {
-                      
                       setState(() {
                         loading = false;
-                        error = 'Could not sign in with those credentials';
+                        error = 'Could not sign in with Google';
                       });
                     }
                   }
-                }
-              ),
-              const SizedBox(height: 12.0),
-              Text(
-                error,
-                style: const TextStyle(color: Colors.red, fontSize: 14.0),
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink[400],
                 ),
-                child: const Text(
-                  'Sign In with Google',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  setState(() {
-                    loading = true;
-                  });
-                  dynamic result = await _auth.signInWithGoogle();
-                  if(result == null) {
-                    setState(() {
-                      loading = false;
-                      error = 'Could not sign in with Google';
-                    });
-                  }
-                }
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
