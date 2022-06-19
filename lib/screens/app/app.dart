@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/home.dart';
 import 'package:travile/screens/app/map.dart';
+import 'package:travile/screens/app/profile_page.dart';
 import 'package:travile/services/auth.dart';
 
 class App extends StatefulWidget {
@@ -31,7 +32,8 @@ class _AppState extends State<App> {
   @override 
   Widget build(BuildContext context) { 
     if (profile) {
-      return Text(widget.user.toString());
+      print("going to profile page");
+      return ProfilePage(user: widget.user);
     } else {
       List<Widget> widgetOptions = <Widget>[
         Home(user: widget.user),
@@ -54,11 +56,16 @@ class _AppState extends State<App> {
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.person, color: Colors.white,),
+              onPressed: () async {
+                profileToggle();
+              },
+            ),
             TextButton.icon(
               icon: const Icon(Icons.person, color: Colors.white,),
               label: const Text('Logout', style: TextStyle(color: Colors.white),),
               onPressed: () async {
-                //profileToggle();
                 await _auth.signOut();
               },
             ),

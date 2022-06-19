@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:travile/services/profile_database.dart';
+import 'package:travile/services/profiles_database.dart';
 import '../models/user.dart';
 
 class AuthService {
