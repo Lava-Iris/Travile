@@ -24,8 +24,8 @@ class ProfilePage extends StatelessWidget {
     print("in profile page");
     return StreamProvider<Profile>.value(
         value: ProfileDatabase(user.uid).profile,
-        initialData: Profile(uid: "ABC", username: 'dummy profile', ),
-        child: ProfileHeader(user: user),
+        initialData: Profile(uid: "ABC", username: 'd', ),
+        child: Scaffold(body: ProfileHeader(user: user),),
       );
   }
   //   return FutureBuilder(
