@@ -42,8 +42,8 @@ class _NewLocationFormState extends State<NewLocationForm> {
               showDatePicker(
                 context: context, 
                 firstDate: DateTime(2000), 
-                initialDate:DateTime.parse('2019-04-16 12:18:06.018950'), 
-                lastDate: DateTime(2022),
+                initialDate:DateTime.now(), 
+                lastDate: DateTime(2030),
 
 
               ).then((date) {setState(() {
