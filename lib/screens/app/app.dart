@@ -32,7 +32,6 @@ class _AppState extends State<App> {
   @override 
   Widget build(BuildContext context) { 
     if (profile) {
-      print("going to profile page");
       return ProfilePage(user: widget.user);
     } else {
       List<Widget> widgetOptions = <Widget>[
@@ -40,7 +39,7 @@ class _AppState extends State<App> {
         const Text(
           'Index 1: Explore',
         ),
-        Map(),
+        const Map(),
         // const Text(
         //   'Index 2: Map',
         // ),

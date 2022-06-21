@@ -1,16 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/profile_header.dart';
-import 'package:travile/screens/app/profile_list.dart';
-import 'package:travile/screens/authenticate/authenticate.dart';
-import 'package:travile/screens/app/app.dart';
-
 import 'package:travile/models/profile.dart';
 import 'package:travile/services/profile_database.dart';
-import 'package:travile/services/profiles_database.dart';
-import 'package:travile/shared/loading.dart';
 
 class ProfilePage extends StatelessWidget {
   final MyUser user;
@@ -21,7 +14,6 @@ class ProfilePage extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context) {
-    print("in profile page");
     return StreamProvider<Profile>.value(
         value: ProfileDatabase(user.uid).profile,
         initialData: Profile(uid: "ABC", username: 'd', ),

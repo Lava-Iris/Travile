@@ -8,11 +8,7 @@ class ProfileDatabase {
   final String uid;
 
   ProfileDatabase(this.uid) {
-    print("uid $uid");
     profileRef = FirebaseFirestore.instance.collection('profiles').doc(uid);
-    profileRef!.get().then((value) {
-      print(value['username']);
-    },);
   }
 
   // Profile get profile (String uid) {
@@ -25,7 +21,6 @@ class ProfileDatabase {
   // }
 
   Profile _profileFromSnapshot(DocumentSnapshot snapshot) {
-    print("A");
     Map<String, dynamic> data =
         snapshot.data()! as Map<String, dynamic>;
     return Profile(
