@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/services/trips_database.dart';
 import 'package:travile/shared/constants.dart';
 
-class NewTripForm extends StatefulWidget {
+class UpdateTripForm extends StatefulWidget {
   final MyUser? user;
-  const NewTripForm({Key? key, required this.user}) : super(key: key);
+  final Trip trip;
+  const UpdateTripForm({Key? key, required this.user, required this.trip}) : super(key: key);
 
   @override
-  State<NewTripForm> createState() => _NewTripFormState();
+  State<UpdateTripForm> createState() => _UpdateTripFormState();
 }
 
-class _NewTripFormState extends State<NewTripForm> {
+class _UpdateTripFormState extends State<UpdateTripForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = "A";
@@ -29,6 +31,7 @@ class _NewTripFormState extends State<NewTripForm> {
           ),
           const SizedBox(height: 30.0),
           TextFormField(
+            initialValue: widget.trip.name,
             decoration: textInputDecoration.copyWith(hintText: "Trip Name"),
             validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
             onChanged: (val) => setState(() => _name = val),
@@ -39,8 +42,10 @@ class _NewTripFormState extends State<NewTripForm> {
               showDatePicker(
                 context: context, 
                 firstDate: DateTime(2000), 
-                initialDate:DateTime.now(), 
+                initialDate:widget.trip.date, 
                 lastDate: DateTime(2030),
+
+
               ).then((date) {setState(() {
                 _date = date!;
               });});
@@ -63,7 +68,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(user:widget.user!).addTrip(_name, _date);
+              await DatabaseService(user:widget.user!).updateTrip(widget.trip.id, _name, _date);
             }
           ),
         ],

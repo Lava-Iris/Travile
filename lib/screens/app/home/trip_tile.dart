@@ -21,7 +21,7 @@ class TripTile extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.delete), 
             onPressed: () async {
-              DatabaseService(uid:user!.uid).deleteTrip(tripId: trip.id);
+              DatabaseService(user:user!).deleteTrip(tripId: trip.id);
             }
           ),
           leading: const CircleAvatar(

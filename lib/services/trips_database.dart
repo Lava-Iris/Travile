@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travile/models/trip.dart';
+import 'package:travile/models/user.dart';
 
 class DatabaseService {
 
-  final String uid;
+  final MyUser user;
   //collection reference
   CollectionReference? tripsCollection; 
 
-  DatabaseService({ required this.uid }) {
-    tripsCollection = FirebaseFirestore.instance.collection('trips').doc(uid).collection('trips-$uid');
+  DatabaseService({ required this.user }) {
+    tripsCollection = FirebaseFirestore.instance.collection('trips').doc(user.uid).collection('trips-${user.uid}');
   }
 
 
@@ -38,6 +39,7 @@ class DatabaseService {
                     document.data()! as Map<String, dynamic>;
                 return Trip(
                   id:document.id,
+                  user: user,
                   name: data['name'],
                   date: (data['date'] as Timestamp).toDate(),
                 );

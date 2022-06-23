@@ -47,7 +47,7 @@ class _ProfileListState extends State<ProfileList> {
       );
     } else {
       return StreamProvider<List<Trip>>.value(
-        value: DatabaseService(uid: widget.user!.uid).trips,
+        value: DatabaseService(user: widget.user!).trips,
         initialData: const [],
         child: TripList(user: widget.user, showTrip: showTrip, showLocation: showLocation),
       );

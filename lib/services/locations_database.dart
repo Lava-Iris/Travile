@@ -43,5 +43,15 @@ class LocationsDatabaseService {
     .map(_locationListFromSnapshot);
   }
 
-  Future updateLocations(String name, DateTime date, String text) async {}
+  Future updateLocation(String locationId, String name, DateTime date, String text) async {
+    return await locationsCollection!.doc(locationId).set({
+      'name': name,
+      'date': date, 
+      'text': text,
+    });
+  }
+
+  Future deleteLocation({required String locationId}) async {
+    await locationsCollection!.doc(locationId).delete();
+  }
 }
