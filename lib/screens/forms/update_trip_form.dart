@@ -21,6 +21,8 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
 
   @override
   Widget build(BuildContext context) {
+    _name = widget.trip.name;
+    _date = widget.trip.date;
     return Form(
       key: _formKey,
       child: Column(
@@ -34,7 +36,7 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
             initialValue: widget.trip.name,
             decoration: textInputDecoration.copyWith(hintText: "Trip Name"),
             validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
-            onChanged: (val) => setState(() => _name = val),
+            onChanged: (val) => _name = val,
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
@@ -46,9 +48,7 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
                 lastDate: DateTime(2030),
 
 
-              ).then((date) {setState(() {
-                _date = date ?? widget.trip.date;
-              });});
+              ).then((date) => _date = date ?? widget.trip.date);
             }, 
             child: const Text("Pick a date"),
           ),

@@ -60,11 +60,9 @@ class LocationsDatabaseService {
     QuerySnapshot list = await locationsCollection!.get();
     
     List<QueryDocumentSnapshot> list2 = list.docs;
-    print(list2);
+
     for (var doc in list2) {
-      print(doc.toString());
       doc.reference.delete();
     }
-    print("delete all done");
   }
 }

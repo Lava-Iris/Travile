@@ -24,6 +24,9 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
 
   @override
   Widget build(BuildContext context) {
+    _name = widget.location.name;
+    _date = widget.location.date;
+    _text = widget.location.text;
     return Form(
       key: _formKey,
       child: Column(
@@ -37,7 +40,7 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             initialValue: widget.location.name,
             decoration: textInputDecoration.copyWith(hintText: "Location"),
             validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
-            onChanged: (val) => setState(() => _name = val),
+            onChanged: (val) => _name = val,
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
@@ -49,19 +52,16 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
                 lastDate: DateTime(2030),
 
 
-              ).then((date) {setState(() {
-                _date = date ?? widget.location.date;
-              });});
+              ).then((date) => _date = date ?? widget.location.date);
             }, 
           child: const Text("Pick a date"),
           ),
-          const SizedBox(height: 10.0),
           const SizedBox(height: 10.0),
           TextFormField(
             initialValue: widget.location.text,
             decoration: textInputDecoration.copyWith(hintText: "Text"),
             validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
-            onChanged: (val) => setState(() => _text = val),
+            onChanged: (val) => _text = val,
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(

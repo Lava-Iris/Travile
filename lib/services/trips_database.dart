@@ -21,12 +21,9 @@ class DatabaseService {
     });
   }
 
-  Future deleteTrip({required Trip trip}) async {   
-    print("delete");                                        
+  Future deleteTrip({required Trip trip}) async {                                     
     LocationsDatabaseService(uid: user.uid, trip: trip).deleteAllLocations();
-    print("between");
     await tripsCollection!.doc(trip.id).delete();
-    print("delete done");
   }
 
   Future updateTrip(String tripId, String name, DateTime date) async {
