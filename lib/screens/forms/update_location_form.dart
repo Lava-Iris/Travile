@@ -50,22 +50,10 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
 
 
               ).then((date) {setState(() {
-                _date = date!;
+                _date = date ?? widget.location.date;
               });});
             }, 
           child: const Text("Pick a date"),
-          ),
-          // TextFormField(
-          //   decoration: textInputDecoration,
-          //   validator: (val) => val!.isEmpty ? 'Please enter a date' : null,
-          //   onChanged: (val) => setState(() => _date = val),
-          // ),
-          const SizedBox(height: 10.0),
-          TextFormField(
-            initialValue: widget.location.text,
-            decoration: textInputDecoration.copyWith(hintText: "Text"),
-            validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
-            onChanged: (val) => setState(() => _text = val),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(

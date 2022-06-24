@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
+import 'package:travile/services/locations_database.dart';
 
 class DatabaseService {
 
@@ -9,7 +10,7 @@ class DatabaseService {
   CollectionReference? tripsCollection; 
 
   DatabaseService({ required this.user }) {
-    tripsCollection = FirebaseFirestore.instance.collection('trips').doc(user.uid).collection('trips-${user.uid}');
+    tripsCollection = FirebaseFirestore.instance.collection('trips').doc(user.uid).collection('trips');
   }
 
 
@@ -20,8 +21,12 @@ class DatabaseService {
     });
   }
 
-  Future deleteTrip({required String tripId}) async {
-    await tripsCollection!.doc(tripId).delete();
+  Future deleteTrip({required Trip trip}) async {   
+    print("delete");                                        
+    LocationsDatabaseService(uid: user.uid, trip: trip).deleteAllLocations();
+    print("between");
+    await tripsCollection!.doc(trip.id).delete();
+    print("delete done");
   }
 
   Future updateTrip(String tripId, String name, DateTime date) async {

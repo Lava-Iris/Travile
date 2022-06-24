@@ -47,7 +47,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
 
 
               ).then((date) {setState(() {
-                _date = date!;
+                _date = date ?? DateTime.now();
               });});
             }, 
           child: const Text("Pick a date"),

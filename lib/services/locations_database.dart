@@ -10,7 +10,7 @@ class LocationsDatabaseService {
   CollectionReference? locationsCollection; 
 
   LocationsDatabaseService({ required this.uid, required this.trip }) {
-    locationsCollection = FirebaseFirestore.instance.collection('locations').doc(uid).collection("trips-$uid").doc(trip.id).collection("locations-$uid");
+    locationsCollection = FirebaseFirestore.instance.collection('locations').doc(uid).collection("trips").doc(trip.id).collection("locations");
   }
 
 
@@ -53,5 +53,18 @@ class LocationsDatabaseService {
 
   Future deleteLocation({required String locationId}) async {
     await locationsCollection!.doc(locationId).delete();
+  }
+                                                                                                                                        
+  Future deleteAllLocations() async {
+
+    QuerySnapshot list = await locationsCollection!.get();
+    
+    List<QueryDocumentSnapshot> list2 = list.docs;
+    print(list2);
+    for (var doc in list2) {
+      print(doc.toString());
+      doc.reference.delete();
+    }
+    print("delete all done");
   }
 }

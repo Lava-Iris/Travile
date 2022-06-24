@@ -1,4 +1,3 @@
-import 'package:travile/main.dart';
 import 'package:travile/models/user.dart';
 
 class Trip {

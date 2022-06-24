@@ -42,7 +42,7 @@ class _NewTripFormState extends State<NewTripForm> {
                 initialDate:DateTime.now(), 
                 lastDate: DateTime(2030),
               ).then((date) {setState(() {
-                _date = date!;
+                _date = date ?? DateTime.now();
               });});
             }, 
             child: const Text("Pick a date"),

@@ -47,7 +47,7 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
 
 
               ).then((date) {setState(() {
-                _date = date!;
+                _date = date ?? widget.trip.date;
               });});
             }, 
             child: const Text("Pick a date"),
@@ -63,12 +63,25 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
               primary: Colors.pink[400],
             ),
             child: const Text(
-              'Add',
+              'Update',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
               Navigator.pop(context);
               await DatabaseService(user:widget.user!).updateTrip(widget.trip.id, _name, _date);
+            }
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.pink[400],
+            ),
+            child: const Text(
+              'Delete',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () async {
+              Navigator.pop(context);
+              await DatabaseService(user:widget.user!).deleteTrip(trip: widget.trip);
             }
           ),
         ],
