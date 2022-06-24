@@ -56,6 +56,14 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
           child: const Text("Pick a date"),
           ),
           const SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
+          TextFormField(
+            initialValue: widget.location.text,
+            decoration: textInputDecoration.copyWith(hintText: "Text"),
+            validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
+            onChanged: (val) => setState(() => _text = val),
+          ),
+          const SizedBox(height: 10.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: Colors.pink[400],
