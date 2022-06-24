@@ -50,8 +50,6 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
                 firstDate: DateTime(2000), 
                 initialDate:widget.location.date, 
                 lastDate: DateTime(2030),
-
-
               ).then((date) => _date = date ?? widget.location.date);
             }, 
           child: const Text("Pick a date"),
