@@ -66,9 +66,8 @@ class _RegisterState extends State<Register> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'username'),
-                  obscureText: true,                
-                  validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                  decoration: textInputDecoration.copyWith(hintText: 'username'),             
+                  validator: (val) => val!.isEmpty ? 'Enter a username' : null,
                   onChanged: (val) {
                     setState(() => username = val);
                   },
