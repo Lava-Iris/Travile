@@ -68,7 +68,7 @@ class _AppState extends State<App> {
             label: 'Explore',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.map_outlined),
             label: 'Map',
           ),
           BottomNavigationBarItem(
