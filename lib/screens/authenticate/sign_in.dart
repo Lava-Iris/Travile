@@ -91,20 +91,44 @@ class _SignInState extends State<SignIn> {
                   }
                 ),
                 const SizedBox(height: 12.0),
-                Text(
-                  error,
-                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
-                ),
-                const SizedBox(height: 20.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.pink[400],
-                  ),
-                  child: const Text(
-                    'Sign In with Google',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //     primary: Colors.pink[400],
+                //   ),
+                //   child: const Text(
+                //     'Sign In with Google',
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                //   onPressed: () async {
+                //     setState(() {
+                //       loading = true;
+                //     });
+                //     dynamic result = await _auth.signInWithGoogle();
+                //     if(result == null) {
+                //       setState(() {
+                //         loading = false;
+                //         error = 'Could not sign in with Google';
+                //       });
+                //     }
+                //   }
+                // ),
+                // IconButton(
+                //   onPressed: () async {
+                //     setState(() {
+                //       loading = true;
+                //     });
+                //     dynamic result = await _auth.signInWithGoogle();
+                //     if(result == null) {
+                //       setState(() {
+                //         loading = false;
+                //         error = 'Could not sign in with Google';
+                //       });
+                //     }
+                //   }, 
+                //   icon: Image.asset('lib/shared/sign_in_google.png', height: 60, width: 200),
+                // ),
+                GestureDetector(
+                  onTap: () async {
                     setState(() {
                       loading = true;
                     });
@@ -115,7 +139,23 @@ class _SignInState extends State<SignIn> {
                         error = 'Could not sign in with Google';
                       });
                     }
-                  }
+                  }, 
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'lib/shared/sign_in_google.png',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
                 ),
               ],
             ),
