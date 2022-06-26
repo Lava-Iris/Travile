@@ -24,7 +24,7 @@ class LocationsDatabaseService {
 
   // trip list from snapshot
   List<Location> _locationListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs
+    List<Location> list = snapshot.docs
               .map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
@@ -36,6 +36,8 @@ class LocationsDatabaseService {
                   text: data['text'],
                 );
     }).toList();
+    list.sort((a, b) => a.date.compareTo(b.date));
+    return list;
   }
 
   Stream<List<Location>> get locations {
