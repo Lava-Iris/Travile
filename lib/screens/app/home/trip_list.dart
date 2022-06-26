@@ -33,50 +33,46 @@ class _TripListState extends State<TripList> {
   @override
   Widget build(BuildContext context) {
     final trips = Provider.of<List<Trip>>(context);
-    return Column(
-      children:[
-        const SizedBox(height: 10.0),
-        Row( 
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(width: 10.0),
-            Ink(
-              decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 187, 134, 115),
-                shape: CircleBorder(),
+    return Scaffold(
+      body: Column(
+        children:[
+          const SizedBox(height: 10.0),
+          Row( 
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(width: 10.0),
+              Ink(
+                decoration: const ShapeDecoration(
+                  color: Color.fromARGB(255, 187, 134, 115),
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  onPressed: () async {
+                    showNewTripPanel();
+                  }, 
+                  icon: const Icon(Icons.search),
+                ),
               ),
-              child: IconButton(
-                onPressed: () async {
-                  showNewTripPanel();
-                }, 
-                icon: const Icon(Icons.add),
-              ),
-            ), 
-            Ink(
-              decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 187, 134, 115),
-                shape: CircleBorder(),
-              ),
-              child: IconButton(
-                onPressed: () async {
-                  showNewTripPanel();
-                }, 
-                icon: const Icon(Icons.search),
-              ),
-            ),
-            const SizedBox(width: 0.0),
-          ]
-        ),
-        
-        Expanded(
-          child: ListView.builder(
-            itemCount: trips.length,
-            itemBuilder: (context, index) {
-              return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user,);
-            },
-          ),// fill in required params
-        )
-      ]
+              const SizedBox(width: 0.0),
+            ]
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: trips.length,
+              itemBuilder: (context, index) {
+                return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user,);
+              },
+            ),// fill in required params
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          showNewTripPanel();
+        }, 
+        backgroundColor: const Color.fromARGB(255, 187, 134, 115),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
