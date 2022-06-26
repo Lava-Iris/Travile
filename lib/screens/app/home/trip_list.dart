@@ -51,7 +51,7 @@ class _TripListState extends State<TripList> {
                 }, 
                 icon: const Icon(Icons.add),
               ),
-            ),
+            ), 
             Ink(
               decoration: const ShapeDecoration(
                 color: Color.fromARGB(255, 187, 134, 115),

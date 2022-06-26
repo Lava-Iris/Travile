@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travile/models/location.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class LocationPage extends StatefulWidget {
   final Location? location;
@@ -52,7 +54,26 @@ class _LocationPageState extends State<LocationPage> {
           ]
         ),
         const SizedBox(height: 30.0),
-        Text(widget.location!.text),
+        SingleChildScrollView(
+          child: Card(
+            color: const Color.fromARGB(255, 207, 169, 155),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              child: Text(
+                widget.location!.text, 
+                style: GoogleFonts.dancingScript(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                )
+                // style: const TextStyle(
+                //   fontWeight: FontWeight.bold,
+                //   fontSize: 16,
+                //   fontStyle: DancingScript,
+                // ),
+              ),
+            )
+          )
+        )
       ]
     );
   }

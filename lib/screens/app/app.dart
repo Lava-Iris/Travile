@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/home.dart';
 import 'package:travile/screens/app/map.dart';
@@ -41,7 +42,14 @@ class _AppState extends State<App> {
     return Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
-        title: const Text('Travile'),
+        leading: Image.asset('lib/shared/logo.png'),
+        title: Text(
+          'Travile', 
+          style: GoogleFonts.dancingScript(
+            fontWeight: FontWeight.w700,
+            fontSize: 25,
+          ),
+        ),
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
         actions: <Widget>[
