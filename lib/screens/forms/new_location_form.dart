@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/services/locations_database.dart';
@@ -37,20 +38,27 @@ class _NewLocationFormState extends State<NewLocationForm> {
             onChanged: (val) => setState(() => _name = val),
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {
-              showDatePicker(
-                context: context, 
-                firstDate: DateTime(2000), 
-                initialDate:DateTime.now(), 
-                lastDate: DateTime(2030),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Date: ${DateFormat('dd-MM-yyyy').format(_date)} ", style: TextStyle(fontSize: 16,)),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+                onPressed: () {
+                  showDatePicker(
+                    context: context, 
+                    firstDate: DateTime(2000), 
+                    initialDate:DateTime.now(), 
+                    lastDate: DateTime(2030),
 
 
-              ).then((date) {setState(() {
-                _date = date ?? DateTime.now();
-              });});
-            }, 
-          child: const Text("Pick a date"),
+                  ).then((date) {setState(() {
+                    _date = date ?? DateTime.now();
+                  });});
+                }, 
+                child: const Text("Pick a date"),
+              ),
+            ],
           ),
           // TextFormField(
           //   decoration: textInputDecoration,
@@ -58,10 +66,14 @@ class _NewLocationFormState extends State<NewLocationForm> {
           //   onChanged: (val) => setState(() => _date = val),
           // ),
           const SizedBox(height: 10.0),
-          TextFormField(
-            decoration: textInputDecoration.copyWith(hintText: "Text"),
-            validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
-            onChanged: (val) => setState(() => _text = val),
+          SingleChildScrollView(
+            child: TextFormField(
+              keyboardType: TextInputType.multiline,
+              maxLines: 50,
+              decoration: textInputDecoration.copyWith(hintText: "Text"),
+              validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
+              onChanged: (val) => setState(() => _text = val),
+            ),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(

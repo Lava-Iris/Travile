@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
@@ -43,24 +44,35 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             onChanged: (val) => _name = val,
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {
-              showDatePicker(
-                context: context, 
-                firstDate: DateTime(2000), 
-                initialDate:widget.location.date, 
-                lastDate: DateTime(2030),
-              ).then((date) => _date = date ?? widget.location.date);
-            }, 
-          child: const Text("Pick a date"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Date: ${DateFormat('dd-MM-yyyy').format(_date)} ", style: TextStyle(fontSize: 16,)),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+                onPressed: () {
+                  showDatePicker(
+                    context: context, 
+                    firstDate: DateTime(2000), 
+                    initialDate:widget.location.date, 
+                    lastDate: DateTime(2030),
+                  ).then((date) {_date = date ?? widget.location.date; print(_date);});//);
+                }, 
+                child: const Text("Pick a date"),
+              ),
+            ],
           ),
           const SizedBox(height: 10.0),
-          TextFormField(
-            initialValue: widget.location.text,
-            decoration: textInputDecoration.copyWith(hintText: "Text"),
-            validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
-            onChanged: (val) => _text = val,
-          ),
+            Expanded(child: SingleChildScrollView(child: TextFormField(
+              keyboardType: TextInputType.multiline,
+              maxLines: 50,
+              initialValue: widget.location.text,
+              decoration: textInputDecoration.copyWith(hintText: "Text"),
+              validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
+              onChanged: (val) {_text = val; print(_date);},
+            ),
+            ),
+            ),
           const SizedBox(height: 10.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -72,6 +84,7 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
+              print(_name + " " + _date.toString() + " " + _text);
               await LocationsDatabaseService(uid:widget.user!.uid, trip: widget.trip).updateLocation(widget.location.id,_name, _date, _text);
             }
           ),

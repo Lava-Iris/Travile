@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travile/models/location.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travile/services/locations_database.dart';
 
 
 class LocationPage extends StatefulWidget {
@@ -53,24 +55,53 @@ class _LocationPageState extends State<LocationPage> {
             const SizedBox(width: 0.0),
           ]
         ),
-        const SizedBox(height: 30.0),
-        SingleChildScrollView(
-          child: Card(
-            color: const Color.fromARGB(255, 207, 169, 155),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-              child: Text(
-                widget.location!.text, 
-                style: GoogleFonts.dancingScript(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                )
-                // style: const TextStyle(
-                //   fontWeight: FontWeight.bold,
-                //   fontSize: 16,
-                //   fontStyle: DancingScript,
-                // ),
+        const SizedBox(height: 10.0),
+        Text(
+          widget.location!.name, 
+          style: GoogleFonts.dancingScript(
+            fontWeight: FontWeight.w700,
+            fontSize: 25,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+            DateFormat('dd-MM-yyyy').format(widget.location!.date) ,         
+            style: GoogleFonts.dancingScript(
+            fontWeight: FontWeight.w700,
+            fontSize: 15,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 20,),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                color: const Color.fromARGB(255, 207, 169, 155),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
+              margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                child: TextFormField(
+                  initialValue: widget.location!.text,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 50,
+                  style: GoogleFonts.dancingScript(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                  onChanged: (val) async {
+                    await LocationsDatabaseService(uid:widget.location!.trip.user.uid, trip: widget.location!.trip)
+                    .updateLocation(widget.location!.id, widget.location!.name, widget.location!.date, val);
+                  },
+                  // style: const TextStyle(
+                  //   fontWeight: FontWeight.bold,
+                  //   fontSize: 16,
+                  //   fontStyle: DancingScript,
+                  // ),
+                ),
+              )
             )
           )
         )

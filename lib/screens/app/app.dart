@@ -40,9 +40,13 @@ class _AppState extends State<App> {
     ]; 
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        leading: Image.asset('lib/shared/logo.png'),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Image.asset('lib/shared/logo.png'),
+        ),
         title: Text(
           'Travile', 
           style: GoogleFonts.dancingScript(

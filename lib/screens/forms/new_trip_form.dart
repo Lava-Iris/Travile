@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/services/trips_database.dart';
 import 'package:travile/shared/constants.dart';
@@ -14,7 +15,7 @@ class NewTripForm extends StatefulWidget {
 class _NewTripFormState extends State<NewTripForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _name = "A";
+  String _name = "Trip Name";
   DateTime _date = DateTime.now();
 
   @override
@@ -34,18 +35,25 @@ class _NewTripFormState extends State<NewTripForm> {
             onChanged: (val) => setState(() => _name = val),
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {
-              showDatePicker(
-                context: context, 
-                firstDate: DateTime(2000), 
-                initialDate:DateTime.now(), 
-                lastDate: DateTime(2030),
-              ).then((date) {setState(() {
-                _date = date ?? DateTime.now();
-              });});
-            }, 
-            child: const Text("Pick a date"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Date: ${DateFormat('dd-MM-yyyy').format(_date)} ", style: TextStyle(fontSize: 16,)),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+                onPressed: () {
+                  showDatePicker(
+                    context: context, 
+                    firstDate: DateTime(2000), 
+                    initialDate:DateTime.now(), 
+                    lastDate: DateTime(2030),
+                  ).then((date) {setState(() {
+                    _date = date ?? DateTime.now();
+                  });});
+                }, 
+                child: const Text("Change date"),
+              ),
+            ]
           ),
           // TextFormField(
           //   decoration: textInputDecoration,

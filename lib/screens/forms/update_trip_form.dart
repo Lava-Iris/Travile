@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/services/trips_database.dart';
@@ -39,18 +40,25 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
             onChanged: (val) => _name = val,
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {
-              showDatePicker(
-                context: context, 
-                firstDate: DateTime(2000), 
-                initialDate:widget.trip.date, 
-                lastDate: DateTime(2030),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Date: ${DateFormat('dd-MM-yyyy').format(_date)} ", style: TextStyle(fontSize: 16,)),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+                onPressed: () {
+                  showDatePicker(
+                    context: context, 
+                    firstDate: DateTime(2000), 
+                    initialDate:widget.trip.date, 
+                    lastDate: DateTime(2030),
 
 
-              ).then((date) => _date = date ?? widget.trip.date);
-            }, 
-            child: const Text("Pick a date"),
+                  ).then((date) => _date = date ?? widget.trip.date);
+                }, 
+                child: const Text("Pick a date"),
+              ),
+            ],
           ),
           // TextFormField(
           //   decoration: textInputDecoration,
