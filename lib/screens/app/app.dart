@@ -79,11 +79,11 @@ class _AppState extends State<App> {
             label: 'App',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.travel_explore),
             label: 'Explore',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
+            icon: Icon(Icons.mode_of_travel_rounded),
             label: 'Map',
           ),
           BottomNavigationBarItem(
