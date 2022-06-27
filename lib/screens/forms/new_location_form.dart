@@ -66,7 +66,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
           //   onChanged: (val) => setState(() => _date = val),
           // ),
           const SizedBox(height: 10.0),
-          SingleChildScrollView(
+          Expanded(child: SingleChildScrollView(
             child: TextFormField(
               keyboardType: TextInputType.multiline,
               maxLines: 50,
@@ -74,6 +74,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
               validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
               onChanged: (val) => setState(() => _text = val),
             ),
+          ),
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(
