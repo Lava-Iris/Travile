@@ -19,17 +19,19 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
 
   String _name = "A";
   DateTime _date = DateTime.now();
+  bool _public = false;
 
   @override
   Widget build(BuildContext context) {
     _name = widget.trip.name;
     _date = widget.trip.date;
+    _public = widget.trip.public;
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           const Text(
-            'Start a new trip',
+            'Update your trip',
             style: TextStyle(fontSize: 18.0),
           ),
           const SizedBox(height: 30.0),
@@ -60,6 +62,20 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
               ),
             ],
           ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     const Text("Make Public", style: TextStyle(fontSize: 16,)),
+          //     const SizedBox(width: 10,),
+          //     Checkbox(
+          //       value: _public, 
+          //       onChanged: (value) {
+          //         _public = value!;
+          //         print(value.toString() + _public.toString());
+          //       },
+          //     ),
+          //   ]
+          // ),
           // TextFormField(
           //   decoration: textInputDecoration,
           //   validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
@@ -76,7 +92,7 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(user:widget.user!).updateTrip(widget.trip.id, _name, _date);
+              await DatabaseService(user:widget.user!).updateTrip(widget.trip.id, _name, _date, _public);
             }
           ),
           ElevatedButton(

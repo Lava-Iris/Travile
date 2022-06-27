@@ -17,6 +17,7 @@ class _NewTripFormState extends State<NewTripForm> {
 
   String _name = "Trip Name";
   DateTime _date = DateTime.now();
+  bool _public = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class _NewTripFormState extends State<NewTripForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
+          const SizedBox(height: 20),
           const Text(
             'Start a new trip',
             style: TextStyle(fontSize: 18.0),
@@ -55,6 +57,22 @@ class _NewTripFormState extends State<NewTripForm> {
               ),
             ]
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Make Public", style: TextStyle(fontSize: 16,)),
+              const SizedBox(width: 10,),
+              Checkbox(
+                value: _public, 
+                onChanged: (bool? value) {
+                  setState(() {
+                    _public = value!;
+                  });
+                },
+              ),
+            ]
+          ),
+          
           // TextFormField(
           //   decoration: textInputDecoration,
           //   validator: (val) => val!.isEmpty ? 'Please enter a name' : null,
@@ -71,7 +89,7 @@ class _NewTripFormState extends State<NewTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(user:widget.user!).addTrip(_name, _date);
+              await DatabaseService(user:widget.user!).addTrip(_name, _date, _public);
             }
           ),
         ],

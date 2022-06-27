@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/models/user.dart';
+import 'package:travile/services/profile_database.dart';
 
 class ProfileHeader extends StatefulWidget {
   final MyUser? user;
@@ -34,64 +35,79 @@ class _ProfileHeaderState extends State<ProfileHeader> {
       ],
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    return StreamProvider<Profile>.value(
+        value: ProfileDatabase(widget.user!.uid).profile,
+        initialData: Profile(uid: "ABC", username: 'd', ),
+        builder: (context, child) {
+          return Scaffold(body: buildHeader(context),);
+        }
+      );
+  }
+
+  Widget buildHeader(BuildContext context) {
     final profile = Provider.of<Profile>(context);
     return Padding (
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: <Widget>[
+          Row(
             children: <Widget>[
-              Row(
-                children: <Widget>[
+              Column(
+                children: [
                   const CircleAvatar(
                     radius: 40.0,
                     backgroundColor: Colors.grey,
                     foregroundColor: Colors.amber,
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: <Widget>[
-                        const SizedBox(height: 10,),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            buildCountColumn("posts", profile.followers),
-                            buildCountColumn("followers", profile.followers),
-                            buildCountColumn("following", profile.following)
-                          ],
-                        ),
-                        const SizedBox(height: 30,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const <Widget>[
-                            Text("Some button"),
-                          ],
-                        )
-                      ],
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: Text(
+                      profile.username,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                     ),
-                  )
+                  ),
                 ],
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(top: 12.0),
-                child: Text(
-                  profile.username,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(top: 2.0),
-                child: Text(
-                  profile.bio,
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(height: 30,),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        buildCountColumn("Posts", profile.followers),
+                        buildCountColumn("Followers", profile.followers),
+                        buildCountColumn("Following", profile.following)
+                      ],
+                    ),
+                    const SizedBox(height: 30,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const <Widget>[
+                        Text("Some button"),
+                      ],
+                    )
+                  ],
                 ),
               )
             ],
           ),
+          
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(top: 2.0),
+            child: Text(
+              profile.bio,
+            ),
+          )
+        ],
+      ),
     );
     // Scaffold(
     //   body: Column(

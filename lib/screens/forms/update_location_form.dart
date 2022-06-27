@@ -33,7 +33,7 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
       child: Column(
         children: <Widget>[
           const Text(
-            'Start a new location',
+            'Update your location',
             style: TextStyle(fontSize: 18.0),
           ),
           const SizedBox(height: 30.0),
@@ -63,16 +63,18 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             ],
           ),
           const SizedBox(height: 10.0),
-            Expanded(child: SingleChildScrollView(child: TextFormField(
-              keyboardType: TextInputType.multiline,
-              maxLines: 50,
-              initialValue: widget.location.text,
-              decoration: textInputDecoration.copyWith(hintText: "Text"),
-              validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
-              onChanged: (val) {_text = val; print(_date);},
+            Expanded(
+              child: SingleChildScrollView(
+                child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: 50,
+                initialValue: widget.location.text,
+                decoration: textInputDecoration.copyWith(hintText: "Text"),
+                validator: (val) => val!.isEmpty ? 'Please enter a text' : null,
+                onChanged: (val) {_text = val; print(_date);},
+              ),
             ),
-            ),
-            ),
+          ),
           const SizedBox(height: 10.0),
           ElevatedButton(
             style: ElevatedButton.styleFrom(

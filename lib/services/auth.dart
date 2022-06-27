@@ -62,7 +62,7 @@ class AuthService {
 
          user = userCredential.user;
 
-         await ProfileDatabaseService().updateProfile(uid:user!.uid, username: googleSignInAccount.displayName);
+         await ProfilesDatabaseService().updateProfile(uid:user!.uid, username: googleSignInAccount.displayName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           print("account exists with different credentials");
@@ -87,7 +87,7 @@ class AuthService {
       User? user = result.user;
 
       //make a new document in the profiles collection
-      await ProfileDatabaseService().updateProfile(uid:user!.uid, username: username);
+      await ProfilesDatabaseService().updateProfile(uid:user!.uid, username: username);
 
       return _userFromFirebaseUser(user);
     } catch (error) {

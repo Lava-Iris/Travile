@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfileDatabaseService {
+class ProfilesDatabaseService {
 
   //collection reference
   CollectionReference? profilesCollection; 
 
-  ProfileDatabaseService() {
+  ProfilesDatabaseService() {
     profilesCollection = FirebaseFirestore.instance.collection('profiles');
   }
 

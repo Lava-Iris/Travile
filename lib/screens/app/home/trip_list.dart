@@ -5,7 +5,7 @@ import 'package:travile/models/user.dart';
 import 'package:travile/services/trips_database.dart';
 import 'package:travile/shared/constants.dart';
 import '../../forms/new_trip_form.dart';
-import 'trip_tile.dart';
+import '../trip_tile.dart';
 
 class TripList extends StatefulWidget {
   final MyUser? user;

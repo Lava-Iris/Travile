@@ -53,6 +53,18 @@ class LocationsDatabaseService {
     });
   }
 
+  Future postLocation(String locationId) async {
+    return await locationsCollection!.doc(locationId).set({
+      'post': true,
+    });
+  }
+
+  Future unPostLocation(String locationId) async {
+    return await locationsCollection!.doc(locationId).set({
+      'post': false,
+    });
+  }
+
   Future deleteLocation({required String locationId}) async {
     await locationsCollection!.doc(locationId).delete();
   }

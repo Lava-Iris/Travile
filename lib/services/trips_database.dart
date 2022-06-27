@@ -14,10 +14,11 @@ class DatabaseService {
   }
 
 
-  Future addTrip(String name, DateTime date) async {
+  Future addTrip(String name, DateTime date, bool public) async {
     return await tripsCollection!.add({
       'name': name,
-      'date': date
+      'date': date,
+      'public': public
     });
   }
 
@@ -26,10 +27,11 @@ class DatabaseService {
     await tripsCollection!.doc(trip.id).delete();
   }
 
-  Future updateTrip(String tripId, String name, DateTime date) async {
+  Future updateTrip(String tripId, String name, DateTime date, bool public) async {
     return await tripsCollection!.doc(tripId).set({
       'name': name,
-      'date': date
+      'date': date,
+      'public': public
     });
   }
 
@@ -52,6 +54,11 @@ class DatabaseService {
 
   Stream<List<Trip>> get trips {  
     return tripsCollection!.snapshots()
+    .map(_tripListFromSnapshot);
+  }
+
+  Stream<List<Trip>> publicTrips() {  
+    return tripsCollection!.where("public", isEqualTo: true).snapshots()
     .map(_tripListFromSnapshot);
   }
 

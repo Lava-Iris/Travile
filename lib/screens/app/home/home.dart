@@ -4,7 +4,7 @@ import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/location_list.dart';
-import 'package:travile/screens/app/home/location_page.dart';
+import 'package:travile/screens/app/location_page.dart';
 import 'package:travile/screens/app/home/trip_list.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/trips_database.dart';

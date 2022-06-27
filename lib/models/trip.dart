@@ -5,7 +5,8 @@ class Trip {
   final MyUser user;
   String name;
   DateTime date;
+  bool public = false;
 
-  Trip({required this.user, required this.id, required this.name, required this.date });
+  Trip({required this.user, required this.id, required this.name, required this.date, this.public = false });
 
 }
