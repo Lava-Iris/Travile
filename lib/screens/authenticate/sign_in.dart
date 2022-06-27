@@ -27,13 +27,16 @@ class _SignInState extends State<SignIn> {
   @override 
   Widget build(BuildContext context) {
       return loading ? const Loading()  : Scaffold(
-        backgroundColor: Colors.brown[100],
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.brown[500],
+          backgroundColor: Color.fromARGB(255, 18, 179, 168),
           elevation: 0.0,
           title: const Text('Sign in to Travile'),
           actions: <Widget>[
           ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 16, 132, 124),
+            ),
             icon: const Icon(Icons.person),
             label: const Text('Register'),
             onPressed: () => widget.toggleView(),
@@ -68,7 +71,7 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.pink[400],
+                    primary: Color.fromARGB(255, 18, 179, 168),
                   ),
                   child: const Text(
                     'Sign In',

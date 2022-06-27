@@ -93,7 +93,7 @@ class _TripListState extends State<TripList> {
           onPressed: () async {
             showNewTripPanel();
           }, 
-          backgroundColor: const Color.fromARGB(255, 187, 134, 115),
+          backgroundColor: const Color.fromARGB(255, 18, 179, 168),
           child: const Icon(Icons.add),
         ),
       );

@@ -27,13 +27,16 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading? const Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Color.fromARGB(255, 18, 179, 168),
         elevation: 0.0,
         title: const Text('Sign up to Travile'),
         actions: <Widget>[
           ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 16, 132, 124),
+            ),
             icon: const Icon(Icons.person),
             label: const Text('Sign In'),
             onPressed: () => widget.toggleView(),
@@ -75,7 +78,7 @@ class _RegisterState extends State<Register> {
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.pink[400],
+                    primary: Color.fromARGB(255, 18, 179, 168),
                   ),
                   child: const Text(
                     'Register',

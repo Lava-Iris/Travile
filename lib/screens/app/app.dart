@@ -31,6 +31,7 @@ class _AppState extends State<App> {
       Home(user: widget.user),
       const Text(
         'Index 1: Explore',
+        style: TextStyle(color: Colors.white),
       ),
       const Map(),
       // const Text(
@@ -54,7 +55,7 @@ class _AppState extends State<App> {
             fontSize: 25,
           ),
         ),
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Color.fromARGB(255, 18, 179, 168),
         elevation: 0.0,
         actions: <Widget>[
           TextButton.icon(

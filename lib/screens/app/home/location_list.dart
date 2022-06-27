@@ -75,7 +75,7 @@ class _LocationListState extends State<LocationList> {
               const SizedBox(width: 0.0),
               Ink(
                 decoration: const ShapeDecoration(
-                  color: Color.fromARGB(255, 187, 134, 115),
+                  color: Color.fromARGB(255, 18, 179, 168),
                   shape: CircleBorder(),
                 ),
                 child: IconButton(
@@ -125,7 +125,7 @@ class _LocationListState extends State<LocationList> {
         onPressed: () async {
           showNewLocationPanel();
         }, 
-        backgroundColor: const Color.fromARGB(255, 187, 134, 115),
+        backgroundColor: const Color.fromARGB(255, 18, 179, 168),
         child: const Icon(Icons.add),
       ),
     );
