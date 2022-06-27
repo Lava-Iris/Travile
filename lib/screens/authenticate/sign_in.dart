@@ -147,6 +147,7 @@ class _SignInState extends State<SignIn> {
                     width: 200.0,
                     height: 50.0,
                     decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       image: DecorationImage(
                         image: AssetImage(
                           'lib/shared/sign_in_google.png',
