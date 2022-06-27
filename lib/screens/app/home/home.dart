@@ -51,6 +51,7 @@ class _HomeState extends State<Home> {
         initialData: const [],
         child: TripList(user: widget.user, showTrip: showTrip, showLocation: showLocation),
       );
+      //return TripList(user: widget.user, showTrip: showTrip, showLocation: showLocation);
     }
   } 
 }

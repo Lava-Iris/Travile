@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/profile_header.dart';
+import 'package:travile/screens/app/profile/profile_header.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/services/profile_database.dart';
 

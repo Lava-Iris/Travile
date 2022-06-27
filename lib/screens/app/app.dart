@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/home/home.dart';
 import 'package:travile/screens/app/map.dart';
-import 'package:travile/screens/app/profile_page.dart';
+import 'package:travile/screens/app/profile/profile_page.dart';
 import 'package:travile/services/auth.dart';
 
 class App extends StatefulWidget {
@@ -40,7 +40,7 @@ class _AppState extends State<App> {
     ]; 
 
     return Scaffold(
-      backgroundColor: Colors.brown[50],
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         leading: Image.asset('lib/shared/logo.png'),
         title: Text(
@@ -66,6 +66,8 @@ class _AppState extends State<App> {
         child: widgetOptions.elementAt(selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

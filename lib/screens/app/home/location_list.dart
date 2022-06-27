@@ -4,6 +4,7 @@ import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/forms/new_location_form.dart';
+import 'package:travile/shared/constants.dart';
 import 'location_tile.dart';
 import 'package:timelines/timelines.dart';
 
@@ -21,6 +22,9 @@ class LocationList extends StatefulWidget {
 
 class _LocationListState extends State<LocationList> {
 
+  String searchTerm = "";
+  List<Location> filteredLocations = [];
+
   void showNewLocationPanel() {
     showModalBottomSheet(
       context: context,
@@ -34,11 +38,34 @@ class _LocationListState extends State<LocationList> {
     );
   }
 
+  void searchLocations(String searchTerm) {
+    setState(() {
+      this.searchTerm = searchTerm;
+    }); 
+  }
+
+  void filterLocations(List<Location> locations) {
+    setState(() {
+      filteredLocations = [];
+    });
+    for (Location location in locations) {
+      setState(() {
+        if (location.name.toLowerCase().contains(searchTerm) ||
+            location.name.contains(searchTerm) ||
+            location.text.toLowerCase().contains(searchTerm) ||
+            location.text.contains(searchTerm)) {
+          filteredLocations.add(location);
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final locations = Provider.of<List<Location>>(context);
-
+    filterLocations(locations);
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Column(
         children:[
           const SizedBox(height: 10.0),
@@ -58,16 +85,16 @@ class _LocationListState extends State<LocationList> {
                   icon: const Icon(Icons.undo),
                 ),
               ),
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Color.fromARGB(255, 187, 134, 115),
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  onPressed: () async {
-                    showNewLocationPanel();
-                  }, 
-                  icon: const Icon(Icons.search),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child:TextField(
+                    decoration: textInputDecoration.copyWith(hintText: "Search your locations"),
+                    onChanged: (val) {
+                      searchLocations(val);
+                      filterLocations(locations);
+                    }
+                  ),
                 ),
               ),
               const SizedBox(width: 0.0),
@@ -86,9 +113,9 @@ class _LocationListState extends State<LocationList> {
             //   )
             // ) 
             child: ListView.builder(
-              itemCount: locations.length,
+              itemCount: filteredLocations.length,
               itemBuilder: (context, index) {
-                return LocationTile(location: locations[index], showLocation: widget.showLocation, showTrip: widget.showTrip,);
+                return LocationTile(location: filteredLocations[index], showLocation: widget.showLocation, showTrip: widget.showTrip,);
               },
             ),// fill in required params
           ),
