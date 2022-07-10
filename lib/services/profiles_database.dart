@@ -14,7 +14,7 @@ class ProfilesDatabaseService {
   }
 
   Future updateProfile({required String uid, String? username, String? bio, int? followers, int? following}) async {
-    return await profilesCollection!.doc(uid).set({
+    return await profilesCollection!.doc(uid).update({
       'username': username ?? "",
       'bio': bio ?? "",
       'followers': followers ?? 0,

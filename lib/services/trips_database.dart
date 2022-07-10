@@ -28,7 +28,7 @@ class DatabaseService {
   }
 
   Future updateTrip(String tripId, String name, DateTime date, bool public) async {
-    return await tripsCollection!.doc(tripId).set({
+    return await tripsCollection!.doc(tripId).update({
       'name': name,
       'date': date,
       'public': public
