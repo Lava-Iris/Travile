@@ -46,7 +46,7 @@ class LocationsDatabaseService {
   }
 
   Future updateLocation(String locationId, String name, DateTime date, String text) async {
-    return await locationsCollection!.doc(locationId).set({
+    return await locationsCollection!.doc(locationId).update({
       'name': name,
       'date': date, 
       'text': text,
@@ -54,13 +54,14 @@ class LocationsDatabaseService {
   }
 
   Future postLocation(String locationId) async {
-    return await locationsCollection!.doc(locationId).set({
+    return await locationsCollection!.doc(locationId).update({
       'post': true,
     });
+
   }
 
   Future unPostLocation(String locationId) async {
-    return await locationsCollection!.doc(locationId).set({
+    return await locationsCollection!.doc(locationId).update({
       'post': false,
     });
   }
