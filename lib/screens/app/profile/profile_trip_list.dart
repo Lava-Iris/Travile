@@ -22,18 +22,15 @@ class _ProfileTripListState extends State<ProfileTripList> {
     final trips = Provider.of<List<Trip>>(context);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: 
-          Expanded(
-            child: ListView.builder(
+      body: ListView.builder(
               itemCount: trips.length,
               itemBuilder: (context, index) {
                 return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user);
               },
             ),// fill in required params
-          ),
-        
-      )
-    );
+          
+      );
+    
+
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
+import 'package:travile/services/profile_database.dart';
 
 class LocationsDatabaseService {
 
@@ -50,10 +51,12 @@ class LocationsDatabaseService {
       'name': name,
       'date': date, 
       'text': text,
-    });
+    }); 
   }
 
   Future postLocation(String locationId) async {
+    print("A");
+    await ProfileDatabase(uid).addPost();
     return await locationsCollection!.doc(locationId).update({
       'post': true,
     });
@@ -80,4 +83,10 @@ class LocationsDatabaseService {
       doc.reference.delete();
     }
   }
+
+  Stream<List<Location>> publicLocations() {  
+    return locationsCollection!.where("post", isEqualTo: true).snapshots()
+    .map(_locationListFromSnapshot);
+  }
+
 }

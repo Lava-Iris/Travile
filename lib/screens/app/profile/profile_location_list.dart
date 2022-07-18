@@ -22,44 +22,6 @@ class ProfileLocationList extends StatefulWidget {
 
 class _ProfileLocationListState extends State<ProfileLocationList> {
 
-  // String searchTerm = "";
-  // List<Location> filteredLocations = [];
-
-  // void showNewLocationPanel() {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     builder: (context) {
-  //       return Container(
-  //         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-  //         child: NewLocationForm(user: widget.user, trip: widget.trip!,),
-  //       );
-  //     }
-  //   );
-  // }
-
-  // void searchLocations(String searchTerm) {
-  //   setState(() {
-  //     this.searchTerm = searchTerm;
-  //   }); 
-  // }
-
-  // void filterLocations(List<Location> locations) {
-  //   setState(() {
-  //     filteredLocations = [];
-  //   });
-  //   for (Location location in locations) {
-  //     setState(() {
-  //       if (location.name.toLowerCase().contains(searchTerm) ||
-  //           location.name.contains(searchTerm) ||
-  //           location.text.toLowerCase().contains(searchTerm) ||
-  //           location.text.contains(searchTerm)) {
-  //         filteredLocations.add(location);
-  //       }
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final locations = Provider.of<List<Location>>(context);
@@ -88,18 +50,7 @@ class _ProfileLocationListState extends State<ProfileLocationList> {
               const SizedBox(width: 0.0),
             ]
           ),
-          Expanded(
-            // child: Timeline.tileBuilder(
-              
-            //   builder: TimelineTileBuilder.fromStyle(
-                
-            //     contentsAlign: ContentsAlign.basic,
-            //     contentsBuilder: (context, index) {
-            //       return LocationTile(location: locations[index], showLocation: widget.showLocation, showTrip: widget.showTrip,);
-            //     },
-            //     itemCount: locations.length,
-            //   )
-            // ) 
+          Expanded( 
             child: ListView.builder(
               itemCount: locations.length,
               itemBuilder: (context, index) {

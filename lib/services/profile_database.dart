@@ -23,17 +23,34 @@ class ProfileDatabase {
   Profile _profileFromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data =
         snapshot.data()! as Map<String, dynamic>;
+    print(data);
     return Profile(
       uid: uid,
       username: data['username'],
       following: data['following'],
       followers: data['followers'],
-      bio: data['bio']
+      bio: data['bio'],
+      posts: data['posts']
     );
   }
 
+  Future addPost() async {
+    print("B");
+    int oldPosts = 0;
+    profileRef!.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        oldPosts = data["posts"];
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    return await profileRef!.update({
+      'posts': oldPosts + 1,
+    });
+  }
 
   Stream<Profile> get profile {
+    print("getting profile from database");
     return profileRef!.snapshots()
     .map(_profileFromSnapshot);
   }

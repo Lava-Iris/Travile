@@ -5,9 +5,10 @@ class Profile {
   String username;
   String bio = "";
   int followers = 0;
-  int following = 0; 
+  int following = 0;
+  int posts = 0;
 
-  Profile({required this.uid, required this.username, String bio = "", int followers = 0, int following = 0});
+  Profile({required this.uid, required this.username, String bio = "", this.followers = 0, this.following = 0, this.posts = 0});
   
   factory Profile.fromDocument(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options,) {
     final data = snapshot.data();
@@ -16,7 +17,8 @@ class Profile {
         username: data?['username'],
         following: data?['following'],
         followers: data?['followers'],
-        bio: data?['bio']
+        bio: data?['bio'],
+        posts: data?['posts']
       );
   }
 
@@ -27,6 +29,7 @@ class Profile {
       "following": following,
       "followers": followers,
       "bio": bio,
+      "posts": posts
     };
   }
 

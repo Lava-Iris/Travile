@@ -20,7 +20,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
       children: <Widget>[
         Text(
           count.toString(),
-          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 22.0, 
+            fontWeight: FontWeight.bold, 
+            color: Colors.white),
         ),
         Container(
           margin: const EdgeInsets.only(top: 4.0),
@@ -42,14 +45,18 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         value: ProfileDatabase(widget.user!.uid).profile,
         initialData: Profile(uid: "ABC", username: 'd', ),
         builder: (context, child) {
-          return Scaffold(body: buildHeader(context),);
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: buildHeader(context),
+            );
         }
       );
   }
 
   Widget buildHeader(BuildContext context) {
     final profile = Provider.of<Profile>(context);
-    return Padding (
+    return Container (
+      height: MediaQuery.of(context).size.height*0.25, 
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: <Widget>[
@@ -81,7 +88,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        buildCountColumn("Posts", profile.followers),
+                        buildCountColumn("Posts", profile.posts),
                         buildCountColumn("Followers", profile.followers),
                         buildCountColumn("Following", profile.following)
                       ],
@@ -89,8 +96,13 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     const SizedBox(height: 30,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const <Widget>[
-                        Text("Some button"),
+                      children: <Widget>[
+                        Text(profile.bio,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w400)
+                        ),
                       ],
                     )
                   ],
@@ -98,26 +110,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               )
             ],
           ),
-          
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(top: 2.0),
-            child: Text(
-              profile.bio,
-            ),
-          )
         ],
       ),
     );
-    // Scaffold(
-    //   body: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     mainAxisSize: MainAxisSize.max,
-    //     children:[
-    //       Text(profile.username)
-    //     ]
-    //   )
-    // );
   }
 }
