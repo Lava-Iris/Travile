@@ -9,7 +9,8 @@ class TripTile extends StatefulWidget {
   final Function showLocation;
   final Function showTrip;
   final Trip trip;
-  const TripTile({Key? key, required this.trip, required this.showLocation, required this.showTrip, required this.user }) : super(key: key);
+  final bool editable;
+  const TripTile({Key? key, required this.trip, required this.showLocation, required this.showTrip, required this.user, this.editable = true }) : super(key: key);
 
   @override
   State<TripTile> createState() => _TripTileState();
@@ -33,24 +34,42 @@ class _TripTileState extends State<TripTile> {
   @override
   Widget build(BuildContext context) {
     String date = DateFormat('dd-MM-yyyy').format(widget.trip.date);
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Card(
-        margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-        child: ListTile(
-          trailing: IconButton(
-            icon: const Icon(Icons.edit), 
-            onPressed: showUpdateTripPanel,
-          ),
-          leading: const CircleAvatar(
-            backgroundColor: Colors.blue,
-            radius: 25.0,
+    if (widget.editable) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Card(
+          margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+          child: ListTile(
+            trailing: IconButton(
+              icon: const Icon(Icons.edit), 
+              onPressed: showUpdateTripPanel,
             ),
-          title: Text(widget.trip.name),
-          subtitle: Text('on $date'),
-          onTap: () async {widget.showTrip(widget.trip);},
+            leading: const CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 25.0,
+              ),
+            title: Text(widget.trip.name),
+            subtitle: Text('on $date'),
+            onTap: () async {widget.showTrip(widget.trip);},
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Card(
+          margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+          child: ListTile(
+            leading: const CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 25.0,
+              ),
+            title: Text(widget.trip.name),
+            subtitle: Text('on $date'),
+            onTap: () async {widget.showTrip(widget.trip);},
+          ),
+        ),
+      );
+    }
   }
 }

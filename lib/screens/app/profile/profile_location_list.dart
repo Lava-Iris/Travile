@@ -54,7 +54,7 @@ class _ProfileLocationListState extends State<ProfileLocationList> {
             child: ListView.builder(
               itemCount: locations.length,
               itemBuilder: (context, index) {
-                return LocationTile(location: locations[index], showLocation: widget.showLocation, showTrip: widget.showTrip,);
+                return LocationTile(location: locations[index], showLocation: widget.showLocation, showTrip: widget.showTrip, editable: false,);
               },
             ),// fill in required params
           ),

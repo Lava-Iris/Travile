@@ -13,8 +13,9 @@ import 'profile_trip_list.dart';
 
 class ProfilePage extends StatefulWidget {
   final MyUser user;
+  final MyUser accessingUser;
 
-  const ProfilePage({Key? key, required this.user}) : super(key: key);
+  const ProfilePage({Key? key, required this.user, required this.accessingUser}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -39,9 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget buildLists(BuildContext context) {
-    if (location != null) {
-      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips, post: true,);
-    } else if (trip != null) {
+    if (trip != null) {
       return StreamProvider<List<Location>>.value(
         value: LocationsDatabaseService(trip: trip!, uid: widget.user.uid).publicLocations(),
         initialData: const [],
@@ -55,20 +54,27 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
   
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
+  Widget buildColumn(BuildContext context) {
+    if (location != null) {
+      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips, post: true,);
+    } else {
+      return Column(
         children: [
           SizedBox( 
             height: MediaQuery.of(context).size.height * 0.25,
             child: ProfileHeader(user: widget.user),
-            
           ),
           Expanded(child: buildLists(context)),
         ],
-      ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: buildColumn(context),
     );
   }
 } 
