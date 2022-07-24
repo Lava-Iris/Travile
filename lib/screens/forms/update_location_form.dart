@@ -87,7 +87,7 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             onPressed: () async {
               Navigator.pop(context);
               print(_name + " " + _date.toString() + " " + _text);
-              await LocationsDatabaseService(uid:widget.user!.uid, trip: widget.trip).updateLocation(widget.location.id,_name, _date, _text);
+              await LocationsDatabaseService(user:widget.user!, trip: widget.trip).updateLocation(widget.location.id,_name, _date, _text);
             }
           ),
           ElevatedButton(
@@ -100,7 +100,7 @@ class _UpdateLocationFormState extends State<UpdateLocationForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await LocationsDatabaseService(uid:widget.user!.uid, trip: widget.trip).deleteLocation(locationId: widget.location.id);
+              await LocationsDatabaseService(user:widget.user!, trip: widget.trip).deleteLocation(locationId: widget.location.id);
             }
           ),
         ],

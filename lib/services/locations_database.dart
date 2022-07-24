@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
-import 'package:travile/services/profile_database.dart';
+import 'package:travile/models/user.dart';
+import 'package:travile/services/profiles_database.dart';
+import 'package:travile/services/trips_database.dart';
 
 class LocationsDatabaseService {
 
-  final String uid;
+  final MyUser user;
   final Trip trip;
   //collection reference
   CollectionReference? locationsCollection; 
 
-  LocationsDatabaseService({ required this.uid, required this.trip }) {
-    locationsCollection = FirebaseFirestore.instance.collection('locations').doc(uid).collection("trips").doc(trip.id).collection("locations");
+  LocationsDatabaseService({ required this.user, required this.trip }) {
+    locationsCollection = FirebaseFirestore.instance.collection('locations').doc(user.uid).collection("trips").doc(trip.id).collection("locations");
   }
 
 
@@ -20,6 +22,7 @@ class LocationsDatabaseService {
       'name': name,
       'date': date,
       'text': text,
+      'post': false
     });
   }
 
@@ -35,6 +38,7 @@ class LocationsDatabaseService {
                   name: data['name'],
                   date: (data['date'] as Timestamp).toDate(),
                   text: data['text'],
+                  post: data['post']
                 );
     }).toList();
     list.sort((a, b) => a.date.compareTo(b.date));
@@ -55,8 +59,8 @@ class LocationsDatabaseService {
   }
 
   Future postLocation(String locationId) async {
-    print("A");
-    await ProfileDatabase(uid).addPost();
+    await DatabaseService(user: user).postTrip(trip);
+    await ProfilesDatabaseService().addPost(user.uid);
     return await locationsCollection!.doc(locationId).update({
       'post': true,
     });
@@ -64,6 +68,7 @@ class LocationsDatabaseService {
   }
 
   Future unPostLocation(String locationId) async {
+    await ProfilesDatabaseService().removePost(user.uid);
     return await locationsCollection!.doc(locationId).update({
       'post': false,
     });
@@ -84,9 +89,32 @@ class LocationsDatabaseService {
     }
   }
 
+  Location _locationFromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data =
+        snapshot.data()! as Map<String, dynamic>;
+    return Location(
+      trip: trip,
+      id: snapshot.id,
+      name: data['name'],
+      date: (data['date'] as Timestamp).toDate(),
+      text: data['text'],
+      post: data['post']
+    );
+  }
+
+  bool _postFromSnapshots(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data =
+        snapshot.data()! as Map<String, dynamic>;
+    return data['post'];
+  }
+
   Stream<List<Location>> publicLocations() {  
     return locationsCollection!.where("post", isEqualTo: true).snapshots()
     .map(_locationListFromSnapshot);
+  }
+
+  Stream<bool> isPosted(Location location) {
+    return locationsCollection!.doc(location.id).snapshots().map(_postFromSnapshots);
   }
 
 }

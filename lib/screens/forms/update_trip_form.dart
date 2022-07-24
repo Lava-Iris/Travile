@@ -92,7 +92,7 @@ class _UpdateTripFormState extends State<UpdateTripForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await DatabaseService(user:widget.user!).updateTrip(widget.trip.id, _name, _date, _public);
+              await DatabaseService(user:widget.user!).updateTrip(widget.trip, _name, _date, _public);
             }
           ),
           ElevatedButton(

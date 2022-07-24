@@ -87,7 +87,7 @@ class _NewLocationFormState extends State<NewLocationForm> {
             ),
             onPressed: () async {
               Navigator.pop(context);
-              await LocationsDatabaseService(uid:widget.user!.uid, trip: widget.trip).addLocation(_name, _date, _text);
+              await LocationsDatabaseService(user:widget.user!, trip: widget.trip).addLocation(_name, _date, _text);
             }
           ),
         ],

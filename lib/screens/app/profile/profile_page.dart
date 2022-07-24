@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/location_page.dart';
+import 'package:travile/screens/app/home/location_page.dart';
 import 'package:travile/screens/app/profile/profile_header.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/trips_database.dart';
@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildLists(BuildContext context) {
     if (trip != null) {
       return StreamProvider<List<Location>>.value(
-        value: LocationsDatabaseService(trip: trip!, uid: widget.user.uid).publicLocations(),
+        value: LocationsDatabaseService(trip: trip!, user: widget.user).publicLocations(),
         initialData: const [],
         child: ProfileLocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user, showTrips: showTrips,),
       );
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
   
   Widget buildColumn(BuildContext context) {
     if (location != null) {
-      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips, post: true,);
+      return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips, isPost: true,);
     } else {
       return Column(
         children: [

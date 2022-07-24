@@ -23,15 +23,27 @@ class DatabaseService {
   }
 
   Future deleteTrip({required Trip trip}) async {                                     
-    LocationsDatabaseService(uid: user.uid, trip: trip).deleteAllLocations();
+    LocationsDatabaseService(user: user, trip: trip).deleteAllLocations();
     await tripsCollection!.doc(trip.id).delete();
   }
 
-  Future updateTrip(String tripId, String name, DateTime date, bool public) async {
-    return await tripsCollection!.doc(tripId).update({
+  Future updateTrip(Trip trip, String name, DateTime date, bool public) async {
+    return await tripsCollection!.doc(trip.id).update({
       'name': name,
       'date': date,
       'public': public
+    });
+  }
+
+  Future postTrip(Trip trip) async {
+    return await tripsCollection!.doc(trip.id).update({
+      'public': true
+    });
+  }
+
+  Future unPostTrip(Trip trip) async {
+    return await tripsCollection!.doc(trip.id).update({
+      'public': false
     });
   }
 

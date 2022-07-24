@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travile/models/location.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travile/models/trip.dart';
 import 'package:travile/services/locations_database.dart';
 
 
@@ -10,9 +11,9 @@ class LocationPage extends StatefulWidget {
   final Function showLocation;
   final Function showTrip;
   final Function showTrips;
-  final bool post;
+  final bool isPost;
 
-  const LocationPage({Key? key, required this.location, required this.showLocation, required this.showTrip, required this.showTrips, this.post = false}) : super(key: key);
+  const LocationPage({Key? key, required this.location, required this.showLocation, required this.showTrip, required this.showTrips, this.isPost = false}) : super(key: key);
 
   @override
   State<LocationPage> createState() => _LocationPageState();
@@ -21,8 +22,14 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
 
   Widget pageBuilder(BuildContext context) {
-    if (widget.post) {
-      return Text(widget.location!.text);
+    if (widget.isPost) {
+      return Text(
+        widget.location!.text,
+        style: GoogleFonts.dancingScript(
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+        ),
+      );
     } else {
       return TextFormField(
         initialValue: widget.location!.text,
@@ -33,11 +40,52 @@ class _LocationPageState extends State<LocationPage> {
           fontSize: 20,
         ),
         onChanged: (val) async {
-          await LocationsDatabaseService(uid:widget.location!.trip.user.uid, trip: widget.location!.trip)
+          await LocationsDatabaseService(user:widget.location!.trip.user, trip: widget.location!.trip)
           .updateLocation(widget.location!.id, widget.location!.name, widget.location!.date, val);
         },
       );
     }
+  }
+
+
+
+
+
+
+  Widget buildFloatingButton(BuildContext context) {
+    Trip trip = widget.location!.trip;
+    return StreamBuilder<bool>(
+      stream: LocationsDatabaseService(trip: trip, user: trip.user).isPosted(widget.location!),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading");
+        }
+
+        if (snapshot.data!) {
+          return FloatingActionButton(
+            onPressed: () async {
+              await LocationsDatabaseService(user:widget.location!.trip.user, trip: widget.location!.trip)
+              .unPostLocation(widget.location!.id);
+            }, 
+            backgroundColor: Color.fromARGB(255, 168, 107, 85),
+            child: const Icon(Icons.unpublished),
+          );
+        } else {
+          return FloatingActionButton(
+            onPressed: () async {
+              await LocationsDatabaseService(user:widget.location!.trip.user, trip: widget.location!.trip)
+              .postLocation(widget.location!.id);
+            }, 
+            backgroundColor: Color.fromARGB(255, 168, 107, 85),
+            child: const Icon(Icons.check_circle),
+          );
+        } 
+      },
+    );    
   }
 
   @override
@@ -45,14 +93,7 @@ class _LocationPageState extends State<LocationPage> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await LocationsDatabaseService(uid:widget.location!.trip.user.uid, trip: widget.location!.trip)
-          .postLocation(widget.location!.id);
-        }, 
-        backgroundColor: Color.fromARGB(255, 168, 107, 85),
-        child: const Icon(Icons.upload),
-      ),
+      floatingActionButton: buildFloatingButton(context),
       body: Column(
         children:[
           const SizedBox(height: 10.0),

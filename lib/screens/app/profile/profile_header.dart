@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/services/profile_database.dart';
+import 'package:travile/services/profiles_database.dart';
 
 class ProfileHeader extends StatefulWidget {
   final MyUser? user;
@@ -42,7 +42,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<Profile>.value(
-        value: ProfileDatabase(widget.user!.uid).profile,
+        value: ProfilesDatabaseService().profile(widget.user!.uid),
         initialData: Profile(uid: "ABC", username: 'd', ),
         builder: (context, child) {
           return Scaffold(
@@ -74,7 +74,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     padding: const EdgeInsets.only(top: 12.0),
                     child: Text(
                       profile.username,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold, 
+                        fontSize: 16.0),
                     ),
                   ),
                 ],
