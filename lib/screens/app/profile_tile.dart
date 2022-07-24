@@ -16,7 +16,6 @@ class ProfileTile extends StatefulWidget {
 class _ProfileTileState extends State<ProfileTile> {
   @override
   Widget build(BuildContext context) {
-    print("building tile");
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(

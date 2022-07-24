@@ -48,8 +48,6 @@ class _ProfileListState extends State<ProfileList> {
     //   initialData: const [],
     //   builder: (context, child) {
       final profiles = Provider.of<List<Profile>>(context);
-      print("list");
-      print(profiles);
       filterProfiles(profiles);
       return Scaffold(
         backgroundColor: Colors.black,
