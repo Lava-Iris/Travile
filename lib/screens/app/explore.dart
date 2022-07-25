@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
+import 'package:travile/screens/app/explore_trip_list.dart';
 import 'package:travile/screens/app/home/location_list.dart';
 import 'package:travile/screens/app/home/location_page.dart';
 import 'package:travile/screens/app/home/trip_list.dart';
 import 'package:travile/screens/app/profile/profile_page.dart';
 import 'package:travile/screens/app/profile_list.dart';
 import 'package:travile/screens/app/profile_tile.dart';
+import 'package:travile/services/following_database.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/profiles_database.dart';
 import 'package:travile/services/trips_database.dart';
 import '../../shared/constants.dart';
+import 'profile/profile_location_list.dart';
+import 'profile/profile_trip_list.dart';
 
 class Explore extends StatefulWidget {
   final MyUser? user;
@@ -24,48 +29,150 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  bool? _dummy;
   Trip? trip;
   Location? location;
   Profile? profile;
+  bool tripList = false;
   void showTrip(Trip trip) {
+    print("SHow trip");
     setState(() => { this.trip = trip });
     setState(() => { location = null });
     setState(() => { profile = null });
   }
 
   void showLocation(Location location) {
+    print("SHow loaction");
     setState(() => { trip = null });
     setState(() => { this.location = location });
     setState(() => { profile = null });
   }
 
   void showExplore() {
+    print("SHow explore");
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { profile = null });
+    setState(() => { tripList = false});
   }
 
   void showProfile(profile) {
+    print("SHow profile");
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { this.profile = profile });
+    setState(() => { tripList = false});
+  }
+
+  void showTripList() {
+    print("SHow trip list");
+    setState(() => { trip = null });
+    setState(() => { location = null });
+    setState(() => { profile = null });
+    setState(() => { tripList = true});
   }
 
   @override
   Widget build(BuildContext context) {
     if (profile != null) {
-      return ProfilePage(user: MyUser(uid: profile!.uid), accessingUser: widget.user!, showExplore: showExplore);
+      return ProfilePage(user: MyUser(uid: profile!.uid), accessingUser: widget.user!, showExplore: showExplore, back: true,);
     } else {
-      return StreamProvider<List<Profile>>.value(
-        value: ProfilesDatabaseService().profiles,
-        initialData: const [],
-        child: ProfileList(showProfile: showProfile, user: widget.user,),
+      return Column(
+        children: [
+          Row(
+            children: [
+              Expanded(child: SizedBox(
+                height: MediaQuery.of(context).size.height*0.06,
+                child: ListTile(  
+                title: const Text('users', style: TextStyle(color: Colors.white)),  
+                leading: Radio(  
+                  fillColor: MaterialStateColor.resolveWith((states) => Colors.white), 
+                  activeColor: Colors.white,
+                  value: false,  
+                  groupValue: _dummy,  
+                  onChanged: (value) {  
+                    showExplore();
+                  },  
+                ),  
+              ), ),), 
+              Expanded(child: SizedBox(
+                height: MediaQuery.of(context).size.height*0.05,
+                child: ListTile(  
+                title: const Text('trips', style: TextStyle(color: Colors.white)),  
+                leading: Radio(  
+                  fillColor: MaterialStateColor.resolveWith((states) => Colors.white), 
+                  value: true,  
+                  groupValue: _dummy,  
+                  onChanged: (value) {  
+                    showTripList();
+                  },   
+                ),  
+              ), )), 
+              // ListTile(  
+              //   title: const Text('locations'),  
+              //   leading: Radio(    
+              //     value: true,  
+              //     groupValue: _dummy,  
+              //     onChanged: (value) {  
+                    
+              //     },  
+              //   ),
+              // ),
+            ],
+          ),
+          buildLists(context)
+        ]
       );
     }
   }
 
-
-
+  Widget buildLists(BuildContext context) {
+    if (location != null) {
+      return Expanded(child: LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTripList, isPost: true,));
+    } else if (tripList) {
+      print("here");
+      return StreamBuilder<List<String>>(
+        stream: FollowingDatabaseService(uid: widget.user!.uid).following,
+        initialData: const [],
+        builder: (context, AsyncSnapshot<List<String>> snapshot) {
+          return Expanded(child: buildLists2(context, snapshot.data!));
+        }
+      );
+    } else {
+      return StreamProvider<List<Profile>>.value(
+        value: ProfilesDatabaseService().profiles,
+        initialData: const [],
+        child: Expanded(child: ProfileList(showProfile: showProfile, user: widget.user,)),
+      );
+    }
+  }
+  
+  Widget buildLists2(BuildContext context, List<String> ids) {
+    //List<String> ids = Provider.of<List<String>>(context);
+    print(ids);
+    if (trip != null) {
+      
+      return StreamProvider<List<Location>>.value(
+        value: LocationsDatabaseService(trip: trip!, user: trip!.user).publicLocations(),
+        initialData: const [],
+        child: ProfileLocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user, showTrips: showTripList,),
+      );
+    } else {
+      return StreamBuilder(
+        stream: CombineLatestStream.list(ids.map((id) => DatabaseService( user: MyUser(uid: id),).publicTrips(),),),
+        initialData: const [],
+        builder: (context, AsyncSnapshot<List> snapshot) {
+          print(snapshot.data);
+          List<Trip> lst = [];
+          snapshot.data!.forEach((element) {
+            lst.addAll(element);
+          });
+          print(lst);
+          lst.sort((a, b) => a.date.compareTo(b.date));
+          return ExploreTripList(user: widget.user, showTrip: showTrip, showLocation: showLocation, trips: lst);
+        },);
+    }
+  }
 
 //   TextEditingController searchController = TextEditingController();
 //   Future searchResultsFuture;

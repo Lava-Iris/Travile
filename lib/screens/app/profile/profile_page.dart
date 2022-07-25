@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
@@ -17,8 +16,9 @@ class ProfilePage extends StatefulWidget {
   final MyUser user;
   final MyUser accessingUser;
   Function? showExplore;
+  bool back;
 
-  ProfilePage({Key? key, required this.user, required this.accessingUser, this.showExplore}) : super(key: key);
+  ProfilePage({Key? key, required this.user, required this.accessingUser, this.showExplore, this.back = false}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -75,35 +75,77 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget buildButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        buildBack(context),
+        buildFollow(context)
+      ],
+    );
+  }
+
+
+  Widget buildBack(BuildContext context) {
+    if (widget.back) {
+      return ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          primary: Color.fromARGB(255, 16, 132, 124),
+        ),
+        icon: const Icon(Icons.undo),
+        label: const Text('Back'),
+        onPressed: () {
+          print("show Explore");
+          widget.showExplore!();
+        },
+      );
+    } else {
+      return const SizedBox(height: 0,);
+    }
+  }
+ 
+  Widget buildFollow(BuildContext context) {
     if (widget.user == widget.accessingUser) {
       return const SizedBox(height: 0,);
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 16, 132, 124),
-            ),
-            icon: const Icon(Icons.undo),
-            label: const Text('Back'),
-            onPressed: () {
-              widget.showExplore!();
-            },
-          ),
-          const SizedBox(width: 10,),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 16, 132, 124),
-            ),
-            icon: const Icon(Icons.person),
-            label: const Text('Follow'),
-            onPressed: () => FollowingDatabaseService(uid: widget.accessingUser.uid).addFollowing(widget.user.uid),
-          ),
-        ],
-      );
+      return StreamBuilder<bool>(
+        stream: FollowingDatabaseService(uid: widget.user.uid).isFollowing(widget.accessingUser.uid),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text("Loading");
+          }
+          print(snapshot.data!);
+          if (snapshot.data!) {
+            return ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 16, 132, 124),
+              ),
+              icon: const Icon(Icons.person),
+              label: const Text('Unfollow'),
+              onPressed: () {
+                FollowingDatabaseService(uid: widget.accessingUser.uid).removeFollowing(widget.user.uid);
+              },
+            );
+          } else {
+            return ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 16, 132, 124),
+              ),
+              icon: const Icon(Icons.person),
+              label: const Text('Follow'),
+              onPressed: () {
+                FollowingDatabaseService(uid: widget.accessingUser.uid).addFollowing(widget.user.uid);
+              },
+            );
+          }
+        },
+      );  
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
