@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/trip_tile.dart';
+import 'package:travile/screens/app/tiles/trip_tile.dart';
 
 class ProfileTripList extends StatefulWidget {
   final MyUser? user;
@@ -22,18 +22,12 @@ class _ProfileTripListState extends State<ProfileTripList> {
     final trips = Provider.of<List<Trip>>(context);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: 
-          Expanded(
-            child: ListView.builder(
-              itemCount: trips.length,
-              itemBuilder: (context, index) {
-                return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user);
-              },
-            ),// fill in required params
-          ),
-        
-      )
+      body: ListView.builder(
+        itemCount: trips.length,
+        itemBuilder: (context, index) {
+          return TripTile(trip: trips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user, editable: false,);
+        },
+      ),// fill in required params
     );
   }
 }

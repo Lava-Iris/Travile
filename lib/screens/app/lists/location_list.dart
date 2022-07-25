@@ -5,7 +5,8 @@ import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/forms/new_location_form.dart';
 import 'package:travile/shared/constants.dart';
-import '../location_tile.dart';
+import '../tiles/location_tile.dart';
+import 'package:timelines/timelines.dart';
 
 class LocationList extends StatefulWidget {
   final MyUser? user;

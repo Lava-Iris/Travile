@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/home/location_list.dart';
+import 'package:travile/screens/app/lists/location_list.dart';
 import 'package:travile/screens/app/location_page.dart';
-import 'package:travile/screens/app/home/trip_list.dart';
+import 'package:travile/screens/app/lists/trip_list.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/trips_database.dart';
 
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
       return LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTrips,);
     } else if (trip != null) {
       return StreamProvider<List<Location>>.value(
-        value: LocationsDatabaseService(trip: trip!, uid: widget.user!.uid).locations,
+        value: LocationsDatabaseService(trip: trip!, user: widget.user!).locations,
         initialData: const [],
         child: LocationList(trip: trip, showTrip: showTrip, showLocation: showLocation, user: widget.user, showTrips: showTrips,),
       );

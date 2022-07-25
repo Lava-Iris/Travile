@@ -7,6 +7,6 @@ class Trip {
   DateTime date;
   bool public = false;
 
-  Trip({required this.user, required this.id, required this.name, required this.date, this.public = false });
+  Trip({required this.user, required this.id, required this.name, required this.date, this.public = true });
 
 }

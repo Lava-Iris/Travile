@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/home/home.dart';
+import 'package:travile/screens/app/explore.dart';
+import 'package:travile/screens/app/home.dart';
 import 'package:travile/screens/app/map.dart';
-import 'package:travile/screens/app/profile/profile_page.dart';
+import 'package:travile/screens/app/profile_page.dart';
 import 'package:travile/services/auth.dart';
 import 'package:travile/shared/constants.dart';
 
@@ -29,16 +30,13 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
       Home(user: widget.user),
-      const Text(
-        'Index 1: Explore',
-        style: TextStyle(color: Colors.white),
-      ),
+      Explore(user: widget.user),
       const Map(),
       // const Text(
       //   'Index 2: Map',
       // ),
-      ProfilePage(user: widget.user),
-    ];
+      ProfilePage(user: widget.user, accessingUser: widget.user),
+    ]; 
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
