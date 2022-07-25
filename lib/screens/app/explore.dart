@@ -5,15 +5,15 @@ import 'package:travile/models/location.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/explore_trip_list.dart';
-import 'package:travile/screens/app/home/location_page.dart';
-import 'package:travile/screens/app/profile/profile_page.dart';
-import 'package:travile/screens/app/profile_list.dart';
+import 'package:travile/screens/app/lists/explore_trip_list.dart';
+import 'package:travile/screens/app/location_page.dart';
+import 'package:travile/screens/app/profile_page.dart';
+import 'package:travile/screens/app/lists/profile_list.dart';
 import 'package:travile/services/following_database.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/profiles_database.dart';
 import 'package:travile/services/trips_database.dart';
-import 'profile/profile_location_list.dart';
+import 'lists/profile_location_list.dart';
 
 class Explore extends StatefulWidget {
   final MyUser? user;
@@ -74,7 +74,7 @@ class _ExploreState extends State<Explore> {
               Expanded(child: SizedBox(
                 height: MediaQuery.of(context).size.height*0.06,
                 child: ListTile(  
-                title: const Text('users', style: TextStyle(color: Colors.white)),  
+                title: const Text('Find people', style: TextStyle(color: Colors.white)),  
                 leading: Radio(  
                   fillColor: MaterialStateColor.resolveWith((states) => Colors.white), 
                   activeColor: Colors.white,
@@ -88,7 +88,7 @@ class _ExploreState extends State<Explore> {
               Expanded(child: SizedBox(
                 height: MediaQuery.of(context).size.height*0.05,
                 child: ListTile(  
-                title: const Text('trips', style: TextStyle(color: Colors.white)),  
+                title: const Text('Your feed', style: TextStyle(color: Colors.white)),  
                 leading: Radio(  
                   fillColor: MaterialStateColor.resolveWith((states) => Colors.white), 
                   value: true,  
