@@ -17,7 +17,7 @@ class _NewTripFormState extends State<NewTripForm> {
 
   String _name = "Trip Name";
   DateTime _date = DateTime.now();
-  bool _public = false;
+  bool _public = true;
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +57,21 @@ class _NewTripFormState extends State<NewTripForm> {
               ),
             ]
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Make Public", style: TextStyle(fontSize: 16,)),
-              const SizedBox(width: 10,),
-              Checkbox(
-                value: _public, 
-                onChanged: (bool? value) {
-                  setState(() {
-                    _public = value!;
-                  });
-                },
-              ),
-            ]
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     const Text("Make Public", style: TextStyle(fontSize: 16,)),
+          //     const SizedBox(width: 10,),
+              // Checkbox(
+              //   value: _public, 
+              //   onChanged: (bool? value) {
+              //     setState(() {
+              //       _public = value!;
+              //     });
+              //   },
+              // ),
+          //   ]
+          // ),
           
           // TextFormField(
           //   decoration: textInputDecoration,

@@ -13,10 +13,13 @@ class FollowersDatabaseService {
 
 
   Future addFollower(String OtherUid) async {
+    print("add follower $OtherUid for $uid");
     ProfilesDatabaseService().addFollower(uid);
+    print("follower profile done");
     await followerCollection!.doc(OtherUid).set({
       'a':"C",
     });
+    print("add follower done");
   }
 
   Future removeFollower(String OtherUid) async {  

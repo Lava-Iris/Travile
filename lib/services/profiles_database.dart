@@ -63,60 +63,62 @@ class ProfilesDatabaseService {
     int oldPosts = 0;
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async {
         final data = doc.data() as Map<String, dynamic>;
         oldPosts = data["posts"];
+        await profileRef.update({
+          'posts': oldPosts + 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'posts': oldPosts + 1,
-    });
   }
 
   Future removePost(String uid) async {
     int oldPosts = 0;    
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async {
         final data = doc.data() as Map<String, dynamic>;
         oldPosts = data["posts"];
+        await profileRef.update({
+          'posts': oldPosts - 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'posts': oldPosts - 1,
-    });
+    
   }
 
   Future removeFollower(String uid) async {
     int oldFollowers = 0;    
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async {
         final data = doc.data() as Map<String, dynamic>;
         oldFollowers = data["followers"];
+        await profileRef.update({
+          'followers': oldFollowers - 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'followers': oldFollowers - 1,
-    });
+    
   }
 
   Future addFollower(String uid) async {
     int oldFollowers = 0;
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async{
         final data = doc.data() as Map<String, dynamic>;
         oldFollowers = data["followers"];
+        await profileRef.update({
+          'followers': oldFollowers + 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'followers': oldFollowers + 1,
-    });
   }
 
 
@@ -124,30 +126,32 @@ class ProfilesDatabaseService {
     int oldFollowing = 0;    
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async {
         final data = doc.data() as Map<String, dynamic>;
         oldFollowing = data["following"];
+        await profileRef.update({
+          'following': oldFollowing - 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'following': oldFollowing - 1,
-    });
   }
 
   Future addFollowing(String uid) async {
     int oldFollowing = 0;
     DocumentReference profileRef = profilesCollection!.doc(uid);
     profileRef.get().then(
-      (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) async {
         final data = doc.data() as Map<String, dynamic>;
+        print(data);
         oldFollowing = data["following"];
+        await profileRef.update({
+          'following': oldFollowing + 1,
+        });
       },
       onError: (e) => print("Error getting document: $e"),
     );
-    return await profileRef.update({
-      'following': oldFollowing + 1,
-    });
+    
   }
 
   Stream<Profile> profile(String uid) {
