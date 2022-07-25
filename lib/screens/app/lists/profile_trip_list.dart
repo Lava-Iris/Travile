@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/trip_tile.dart';
+import 'package:travile/screens/app/tiles/trip_tile.dart';
 
 class ProfileTripList extends StatefulWidget {
   final MyUser? user;

@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:travile/models/location.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/home/location_page.dart';
-import 'package:travile/screens/app/profile/profile_header.dart';
+import 'package:travile/screens/app/location_page.dart';
+import 'package:travile/screens/app/profile_header.dart';
 import 'package:travile/services/following_database.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/trips_database.dart';
 
-import 'profile_location_list.dart';
-import 'profile_trip_list.dart';
+import 'lists/profile_location_list.dart';
+import 'lists/profile_trip_list.dart';
 
 class ProfilePage extends StatefulWidget {
   final MyUser user;

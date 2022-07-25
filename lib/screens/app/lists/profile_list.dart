@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/profile.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/profile_tile.dart';
+import 'package:travile/screens/app/tiles/profile_tile.dart';
 import 'package:travile/services/profiles_database.dart';
 import 'package:travile/shared/constants.dart';
 

@@ -2,26 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/trip_tile.dart';
 import 'package:travile/services/trips_database.dart';
 import 'package:travile/shared/constants.dart';
+import '../../forms/new_trip_form.dart';
+import '../tiles/trip_tile.dart';
 
-class ExploreTripList extends StatefulWidget {
+class TripList extends StatefulWidget {
   final MyUser? user;
   final Function showLocation;
   final Function showTrip;
-  List<Trip> trips;
-  ExploreTripList({Key? key, required this.showLocation, required this.showTrip, required this.user, required this.trips}) : super(key: key);
+  const TripList({Key? key, required this.showLocation, required this.showTrip, required this.user}) : super(key: key);
 
   @override
-  State<ExploreTripList> createState() => _ExploreTripListState();
+  State<TripList> createState() => _TripListState();
 }
 
-class _ExploreTripListState extends State<ExploreTripList> {
+class _TripListState extends State<TripList> {
 
   String searchTerm = "";
   List<Trip> filteredTrips = [];
 
+  void showNewTripPanel() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+          child: NewTripForm(user: widget.user),
+        );
+      }
+    );
+  }
 
   void searchTrips(String searchTerm) {
     setState(() {
@@ -50,7 +62,7 @@ class _ExploreTripListState extends State<ExploreTripList> {
     //   value: DatabaseService(user: widget.user!).trips,
     //   initialData: const [],
     //   builder: (context, child) {
-      List<Trip> trips = widget.trips;
+      final trips = Provider.of<List<Trip>>(context);
       filterTrips(trips);
       return Scaffold(
         backgroundColor: Colors.black,
@@ -71,11 +83,18 @@ class _ExploreTripListState extends State<ExploreTripList> {
               child: ListView.builder(
                 itemCount: filteredTrips.length,
                 itemBuilder: (context, index) {
-                  return TripTile(trip: filteredTrips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user, editable: false,);
+                  return TripTile(trip: filteredTrips[index], showLocation: widget.showLocation, showTrip: widget.showTrip, user: widget.user);
                 },
               ),// fill in required params
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            showNewTripPanel();
+          }, 
+          backgroundColor: const Color.fromARGB(255, 18, 179, 168),
+          child: const Icon(Icons.add),
         ),
       );
     }

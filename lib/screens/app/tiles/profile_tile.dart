@@ -1,7 +1,7 @@
 import 'package:travile/models/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:travile/models/user.dart';
-import 'package:travile/screens/app/profile/profile_page.dart';
+import 'package:travile/screens/app/profile_page.dart';
 
 class ProfileTile extends StatefulWidget {
   final MyUser? user;
