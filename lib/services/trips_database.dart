@@ -60,7 +60,7 @@ class DatabaseService {
                   date: (data['date'] as Timestamp).toDate(),
                 );
     }).toList();
-    list.sort((a, b) => a.date.compareTo(b.date));
+    list.sort((b, a) => a.date.compareTo(b.date));
     return list;
   }
 

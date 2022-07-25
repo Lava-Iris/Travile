@@ -153,7 +153,7 @@ class _ExploreState extends State<Explore> {
           snapshot.data!.forEach((element) {
             lst.addAll(element);
           });
-          lst.sort((a, b) => a.date.compareTo(b.date));
+          lst.sort((b, a) => a.date.compareTo(b.date));
           return ExploreTripList(user: widget.user, showTrip: showTrip, showLocation: showLocation, trips: lst);
         },);
     }

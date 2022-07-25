@@ -125,7 +125,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            buildCountColumn("Posts", profile.posts),
+                            buildCountColumn("Locations", profile.posts),
                             buildCountColumn("Followers", profile.followers),
                             buildCountColumn("Following", profile.following)
                           ],

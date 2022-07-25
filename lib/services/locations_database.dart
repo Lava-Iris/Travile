@@ -41,7 +41,7 @@ class LocationsDatabaseService {
                   post: data['post']
                 );
     }).toList();
-    list.sort((a, b) => a.date.compareTo(b.date));
+    list.sort((b, a) => a.date.compareTo(b.date));
     return list;
   }
 
