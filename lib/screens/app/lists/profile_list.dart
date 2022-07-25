@@ -57,7 +57,7 @@ class _ProfileListState extends State<ProfileList> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               child:TextField(
-                decoration: textInputDecoration.copyWith(hintText: "Search your profiles"),
+                decoration: textInputDecoration.copyWith(hintText: "Search for people"),
                 onChanged: (val) {
                   searchProfiles(val);
                   filterProfiles(profiles);

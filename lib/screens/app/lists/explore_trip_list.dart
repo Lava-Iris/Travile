@@ -60,7 +60,7 @@ class _ExploreTripListState extends State<ExploreTripList> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               child:TextField(
-                decoration: textInputDecoration.copyWith(hintText: "Search your trips"),
+                decoration: textInputDecoration.copyWith(hintText: "Search your feed"),
                 onChanged: (val) {
                   searchTrips(val);
                   filterTrips(trips);

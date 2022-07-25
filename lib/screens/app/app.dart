@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/explore.dart';
-import 'package:travile/screens/app/home/home.dart';
+import 'package:travile/screens/app/home.dart';
 import 'package:travile/screens/app/map.dart';
-import 'package:travile/screens/app/profile/profile_page.dart';
+import 'package:travile/screens/app/profile_page.dart';
 import 'package:travile/services/auth.dart';
 
 class App extends StatefulWidget {
