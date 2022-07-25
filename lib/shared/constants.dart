@@ -11,3 +11,8 @@ const textInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.pink, width: 2.0),
   ),
 );
+
+const pricol = Color.fromARGB(255, 18, 179, 168);
+const secol = Color.fromARGB(255, 16, 132, 124);
+const bro = Colors.brown;
+const lbro = Colors.amber;

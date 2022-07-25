@@ -6,9 +6,9 @@ import 'package:travile/screens/app/home.dart';
 import 'package:travile/screens/app/map.dart';
 import 'package:travile/screens/app/profile_page.dart';
 import 'package:travile/services/auth.dart';
+import 'package:travile/shared/constants.dart';
 
 class App extends StatefulWidget {
-
   final MyUser user;
   const App({Key? key, required this.user}) : super(key: key);
 
@@ -26,8 +26,8 @@ class _AppState extends State<App> {
     });
   }
 
-  @override 
-  Widget build(BuildContext context) { 
+  @override
+  Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
       Home(user: widget.user),
       Explore(user: widget.user),
@@ -47,18 +47,24 @@ class _AppState extends State<App> {
           child: Image.asset('lib/shared/logo.png'),
         ),
         title: Text(
-          'Travile', 
+          'Travile',
           style: GoogleFonts.dancingScript(
             fontWeight: FontWeight.w700,
             fontSize: 25,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 18, 179, 168),
+        backgroundColor: pricol,
         elevation: 0.0,
         actions: <Widget>[
           TextButton.icon(
-            icon: const Icon(Icons.person, color: Colors.white,),
-            label: const Text('Logout', style: TextStyle(color: Colors.white),),
+            icon: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+            label: const Text(
+              'Logout',
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () async {
               await _auth.signOut();
             },
@@ -87,10 +93,11 @@ class _AppState extends State<App> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
-          ),],
+          ),
+        ],
         currentIndex: selectedIndex,
-        unselectedItemColor: Colors.brown[500],
-        selectedItemColor: Colors.amber[800],
+        unselectedItemColor: bro,
+        selectedItemColor: lbro,
         onTap: _onItemTapped,
       ),
     );
