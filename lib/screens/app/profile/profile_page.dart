@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
       return const SizedBox(height: 0,);
     } else {
       return StreamBuilder<bool>(
-        stream: FollowingDatabaseService(uid: widget.user.uid).isFollowing(widget.accessingUser.uid),
+        stream: FollowingDatabaseService(uid: widget.accessingUser.uid).isFollowing(widget.user.uid),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasError) {
             return const Text('Something went wrong');
