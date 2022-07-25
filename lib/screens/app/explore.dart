@@ -39,7 +39,7 @@ class _ExploreState extends State<Explore> {
     setState(() => { profile = null });
   }
 
-  void showHome() {
+  void showExplore() {
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { profile = null });
@@ -54,7 +54,7 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     if (profile != null) {
-      return ProfilePage(user: MyUser(uid: profile!.uid), accessingUser: widget.user!);
+      return ProfilePage(user: MyUser(uid: profile!.uid), accessingUser: widget.user!, showExplore: showExplore);
     } else {
       return StreamProvider<List<Profile>>.value(
         value: ProfilesDatabaseService().profiles,

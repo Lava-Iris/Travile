@@ -16,8 +16,9 @@ import 'profile_trip_list.dart';
 class ProfilePage extends StatefulWidget {
   final MyUser user;
   final MyUser accessingUser;
+  Function? showExplore;
 
-  const ProfilePage({Key? key, required this.user, required this.accessingUser}) : super(key: key);
+  ProfilePage({Key? key, required this.user, required this.accessingUser, this.showExplore}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -78,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
       return const SizedBox(height: 0,);
     } else {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
@@ -85,8 +87,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             icon: const Icon(Icons.undo),
             label: const Text('Back'),
-            onPressed: () => print("ANC"),
+            onPressed: () {
+              widget.showExplore!();
+            },
           ),
+          const SizedBox(width: 10,),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               primary: Color.fromARGB(255, 16, 132, 124),
