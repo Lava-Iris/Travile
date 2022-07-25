@@ -94,7 +94,6 @@ class _ProfilePageState extends State<ProfilePage> {
         icon: const Icon(Icons.undo),
         label: const Text('Back'),
         onPressed: () {
-          print("show Explore");
           widget.showExplore!();
         },
       );
@@ -117,7 +116,6 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Text("Loading");
           }
-          print(snapshot.data!);
           if (snapshot.data!) {
             return ElevatedButton.icon(
               style: ElevatedButton.styleFrom(

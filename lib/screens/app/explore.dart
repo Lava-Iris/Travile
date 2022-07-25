@@ -6,19 +6,14 @@ import 'package:travile/models/profile.dart';
 import 'package:travile/models/trip.dart';
 import 'package:travile/models/user.dart';
 import 'package:travile/screens/app/explore_trip_list.dart';
-import 'package:travile/screens/app/home/location_list.dart';
 import 'package:travile/screens/app/home/location_page.dart';
-import 'package:travile/screens/app/home/trip_list.dart';
 import 'package:travile/screens/app/profile/profile_page.dart';
 import 'package:travile/screens/app/profile_list.dart';
-import 'package:travile/screens/app/profile_tile.dart';
 import 'package:travile/services/following_database.dart';
 import 'package:travile/services/locations_database.dart';
 import 'package:travile/services/profiles_database.dart';
 import 'package:travile/services/trips_database.dart';
-import '../../shared/constants.dart';
 import 'profile/profile_location_list.dart';
-import 'profile/profile_trip_list.dart';
 
 class Explore extends StatefulWidget {
   final MyUser? user;
@@ -35,21 +30,18 @@ class _ExploreState extends State<Explore> {
   Profile? profile;
   bool tripList = false;
   void showTrip(Trip trip) {
-    print("SHow trip");
     setState(() => { this.trip = trip });
     setState(() => { location = null });
     setState(() => { profile = null });
   }
 
   void showLocation(Location location) {
-    print("SHow loaction");
     setState(() => { trip = null });
     setState(() => { this.location = location });
     setState(() => { profile = null });
   }
 
   void showExplore() {
-    print("SHow explore");
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { profile = null });
@@ -57,7 +49,6 @@ class _ExploreState extends State<Explore> {
   }
 
   void showProfile(profile) {
-    print("SHow profile");
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { this.profile = profile });
@@ -65,7 +56,6 @@ class _ExploreState extends State<Explore> {
   }
 
   void showTripList() {
-    print("SHow trip list");
     setState(() => { trip = null });
     setState(() => { location = null });
     setState(() => { profile = null });
@@ -130,7 +120,6 @@ class _ExploreState extends State<Explore> {
     if (location != null) {
       return Expanded(child: LocationPage(location: location, showTrip: showTrip, showLocation: showLocation, showTrips: showTripList, isPost: true,));
     } else if (tripList) {
-      print("here");
       return StreamBuilder<List<String>>(
         stream: FollowingDatabaseService(uid: widget.user!.uid).following,
         initialData: const [],
@@ -148,8 +137,6 @@ class _ExploreState extends State<Explore> {
   }
   
   Widget buildLists2(BuildContext context, List<String> ids) {
-    //List<String> ids = Provider.of<List<String>>(context);
-    print(ids);
     if (trip != null) {
       
       return StreamProvider<List<Location>>.value(
@@ -162,12 +149,10 @@ class _ExploreState extends State<Explore> {
         stream: CombineLatestStream.list(ids.map((id) => DatabaseService( user: MyUser(uid: id),).publicTrips(),),),
         initialData: const [],
         builder: (context, AsyncSnapshot<List> snapshot) {
-          print(snapshot.data);
           List<Trip> lst = [];
           snapshot.data!.forEach((element) {
             lst.addAll(element);
           });
-          print(lst);
           lst.sort((a, b) => a.date.compareTo(b.date));
           return ExploreTripList(user: widget.user, showTrip: showTrip, showLocation: showLocation, trips: lst);
         },);
