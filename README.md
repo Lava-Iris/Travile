@@ -993,7 +993,7 @@ Blackbox Testing:
 
 **Lift off + Milestone 1 (9 May - 30 May 2022)**
 
-| SN | TASK                        | DATE            | ORBITEE 1 (Lavanya) | ORBITEE 2 (Lavanya) | REMARKS                                                  |
+| SN | TASK                        | DATE            | ORBITEE 1 (Lavanya) | ORBITEE 2 (Mahesh Anugraha) | REMARKS                                                  |
 |----|-----------------------------|-----------------|---------------------|---------------------|----------------------------------------------------------|
 | 1. | Liftoff                     | 9 May - 16 May  | 5                   | 5                   | Poster and video making                                  |
 | 2. | Learning Tech Stack         | 14 May - 30 May | 30                  | 30                  | Frontend: Learning Flutter<br>Backend: Learning Firebase |
@@ -1008,7 +1008,7 @@ Blackbox Testing:
 
 **Milestone 2 (31 May - 27 June 2022)**
 
-| SN  | TASK                                                                      | DATE                 | ORBITEE 1 (Lavanya) | ORBITEE 2 (Anugraha) | REMARKS |
+| SN  | TASK                                                                      | DATE                 | ORBITEE 1 (Lavanya) | ORBITEE 2 (Mahesh Anugraha) | REMARKS |
 |-----|---------------------------------------------------------------------------|----------------------|---------------------|----------------------|---------|
 | 1.  | Debugging and version change: home page completed                         | 31 May - 4 Jun 2022  | 20                  | 5                    | Had to change the versions and ensure everything was compatible, and get rid of the errors  |
 | 2.  | Peer Review                                                               | 31 May - 6 Jun 2022  | 5                   | 5                    | Went through readme file, poster and video of each team. |
@@ -1031,7 +1031,7 @@ Blackbox Testing:
 
 **Milestone 3 (28 June - 25 July 2022)**
 
-| SN  | TASK                                                | DATE                 | ORBITEE 1 (Lavanya) | ORBITEE 2 (Anugraha) | REMARKS |
+| SN  | TASK                                                | DATE                 | ORBITEE 1 (Lavanya) | ORBITEE 2 (Mahesh Anugraha) | REMARKS |
 |-----|-----------------------------------------------------|----------------------|---------------------|----------------------|---------|
 | 1.  | Evaluated other team’s milestone 2 submissions      | 28 Jun - 4 Jul 2022  | 0                   | 7                    | Tested app and went through README, poster and video and gave reviews accordingly.  |
 | 2.  | Watched tutorials for making social media app       | 28 Jun - 5 Jun 2022  | 5                   | 0                    | Found a tutorial online  that made an entire social media app. Scoured the tutorials to find things to add to the app |
