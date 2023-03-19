@@ -30,7 +30,7 @@ Our goal is to provide a reliable and intuitive platform for travelers to record
 
 ## Important links:
 
-- Project APK file (for testing): https://drive.google.com/file/d/1w3ZllJfxpCCsumGSjFa7C1fJ5IjPP1Ik/view?usp=sharing
+- Project APK file (for testing): https://drive.google.com/file/d/18TfDxtZEuHxddmtiaAE_65gOLunmaAj2/view?usp=sharing
 - Github Repository: https://github.com/Lava-Iris/Travile
 - Posters:  
   https://www.canva.com/design/DAFE25qQjHg/Nncc0p_JXVAVAzQ94cxdGQ/view?utm_content=DAFE25qQjHg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink  
